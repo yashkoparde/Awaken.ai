@@ -1,0 +1,11 @@
+{
+  "name": "Awaken.ai",
+  "description": "A professional AI-powered interview coach and career development dashboard for high-stakes preparation.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
