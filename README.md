@@ -1,119 +1,49 @@
-# 🌟 Awaken.ai - AI Career & Interview Platform
+<p align="center">
+  <svg width="800" height="180" viewBox="0 0 800 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="180" rx="16" fill="#090D16"/>
+    <defs>
+      <linearGradient id="neon-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#38BDF8"/>
+        <stop offset="50%" stop-color="#6366F1"/>
+        <stop offset="100%" stop-color="#A855F7"/>
+      </linearGradient>
+      <pattern id="dot-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1" fill="#334155" fill-opacity="0.4"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="180" rx="16" fill="url(#dot-pattern)"/>
+    <path d="M 0 90 Q 200 40 400 90 T 800 90" stroke="url(#neon-cyan)" stroke-width="1.5" stroke-opacity="0.3" fill="none"/>
+    <rect x="40" y="32" width="110" height="26" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="52" y="49" fill="#38BDF8" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="0.1em">SYSTEM CORE</text>
+    <text x="40" y="105" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="44" font-weight="900" letter-spacing="-0.03em">AWAKEN.AI</text>
+    <text x="40" y="136" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="14" font-weight="500">Autonomous Interview Intelligence & High-Stakes Career Simulation Infrastructure</text>
+    <circle cx="730" cy="90" r="42" stroke="#1E293B" stroke-width="2" fill="#0B132B"/>
+    <circle cx="730" cy="90" r="28" stroke="#38BDF8" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+    <circle cx="730" cy="90" r="8" fill="#6366F1"/>
+    <line x1="688" y1="90" x2="772" y2="90" stroke="#334155" stroke-width="1"/>
+    <line x1="730" y1="48" x2="730" y2="132" stroke="#334155" stroke-width="1"/>
+  </svg>
+</p>
 
-> **Simple, All-in-One Guide for Team Members & Stakeholders**  
-> Welcome to **Awaken.ai**! This project includes an **AI Resume ATS Scanner**, **Mock Interview Simulator**, and a **PHP Account Server** to save candidate details.
-
----
-
-## 🔑 1. Which API Key Do You Need?
-
-You only need **one primary API key**:
-
-### 👉 **Groq API Key** (Free & Fast)
-- **Where to get it**: [https://console.groq.com/keys](https://console.groq.com/keys)
-- **How much does it cost?**: Free.
-- **Where to put it**: Open the file named `.env` in the project folder, find `VITE_GROQ_API_KEY=`, and paste your key inside the quotation marks:
-  ```env
-  VITE_GROQ_API_KEY="gsk_your_actual_groq_key_here"
-  ```
-*(If you run the app without a key, the system automatically uses smart built-in responses, so nothing will crash!)*
-
----
-
-## 🚀 2. Quick Start (Run in 3 Steps)
-
-### Step 1: Install Dependencies
-Open your terminal (PowerShell, Command Prompt, or VS Code terminal) in the project folder and type:
-```bash
-npm install
-```
-
-### Step 2: Add your API key
-Make sure your `.env` file has your Groq API key:
-```env
-VITE_GROQ_API_KEY="your_groq_key_here"
-VITE_PHP_API_URL="http://127.0.0.1:8000/api"
-```
-
-### Step 3: Run the Project
-- **Option A (Easiest)**: Double-click **`start-project.bat`** in the project folder.  
-  *(This automatically launches both the PHP backend and the web app!)*
-- **Option B (Manual)**:
-  1. In Terminal 1 (Backend):
-     ```bash
-     cd server
-     php -S 127.0.0.1:8000 index.php
-     ```
-  2. In Terminal 2 (Frontend):
-     ```bash
-     npm run dev
-     ```
-  3. Open your browser at **`http://localhost:3000`**!
+<p align="center">
+  <img src="https://img.shields.io/badge/Architecture-Distributed%20Multi--Agent-0ea5e9?style=for-the-badge&labelColor=0f172a" alt="Architecture" />
+  <img src="https://img.shields.io/badge/ATS%20Scoring-Deterministic%20%2B%20LLM-6366f1?style=for-the-badge&labelColor=0f172a" alt="ATS Scoring" />
+  <img src="https://img.shields.io/badge/Engine-Groq%20%7C%20Llama--3.3%20%7C%20GPT--OSS-8b5cf6?style=for-the-badge&labelColor=0f172a" alt="Groq Engine" />
+  <img src="https://img.shields.io/badge/Storage-SQLite%20%7C%20MySQL%20%7C%20Supabase-10b981?style=for-the-badge&labelColor=0f172a" alt="Storage" />
+  <img src="https://img.shields.io/badge/Interface-React%2019%20%7C%20Tailwind%20v4-38bdf8?style=for-the-badge&labelColor=0f172a" alt="Interface" />
+</p>
 
 ---
 
-## 📁 3. Simple Project Folder Structure
+## Technical Index
 
-Here is an easy-to-read explanation of the folder layout:
-
-```
-Awaken.ai/
-│
-├── 📂 server/                     # 🐘 PHP BACKEND SERVER
-│   ├── config.php                 # Database settings (SQLite / MySQL)
-│   ├── db.php                     # Database tables (Users, Profiles, Scans, Tests)
-│   ├── index.php                  # Server endpoints (Login, Register, Scans)
-│   ├── run-server.bat             # Double-click to start PHP server alone
-│   └── database.sqlite            # Auto-generated database file (stores accounts)
-│
-├── 📂 src/                        # 💻 FRONTEND (REACT & USER INTERFACE)
-│   ├── components/                # Visual screens of the application:
-│   │   ├── WarMap.tsx             # Main dashboard navigation
-│   │   ├── NeuralLink.tsx         # Sign-in & Sign-up screen
-│   │   ├── ProfileSetup.tsx       # Profile details (name, target role, links)
-│   │   ├── ResumeBuilder.tsx      # ATS Resume Scanner (Calculates match score)
-│   │   ├── VoiceResumeBuilder.tsx # Voice/Oral resume builder
-│   │   ├── QAGenerator.tsx        # Interview prep question generator
-│   │   ├── WrittenTest.tsx        # Technical domain tests & scoring
-│   │   ├── VaultSimulator.tsx     # Mock interview simulation (Webcam/Audio)
-│   │   ├── ResourceFinder.tsx     # Recommended tutorials & study links
-│   │   └── AnalyticsVault.tsx     # Performance charts & score history
-│   │
-│   └── lib/                       # 🧠 CORE LOGIC & INTELLIGENCE
-│       ├── atsAlgorithm.ts        # The ATS Resume Scoring math & rules
-│       ├── groq.ts                # Connects to Groq AI (Llama 3.3)
-│       └── api.ts                 # Talks to the PHP backend
-│
-├── ⚙️ .env                        # Secret keys file (Put your Groq key here)
-├── 🚀 start-project.bat           # 1-Click launcher for Windows
-├── 📦 package.json                # Project dependencies list
-└── 📄 README.md                   # This instruction guide
-```
-
----
-
-## 🎯 4. What Does the ATS Algorithm Check?
-
-When a user scans their resume against a job description, the system grades it on 4 areas:
-1. **Keyword Match (40%)**: Compares the skills in the job description to the resume.
-2. **Standard Section Headers (25%)**: Checks for Contact, Summary, Experience, Skills, Education, and Projects.
-3. **Quantifiable Impact (20%)**: Checks for real numbers, percentages (`%`), revenue (`$`), and metric improvements.
-4. **Action Power Verbs (15%)**: Looks for strong action verbs (`Architected`, `Spearheaded`, `Optimized`).
-
----
-
-## 🌐 5. How to Host Online
-
-### For Shared Hosting (cPanel / Apache):
-1. Run `npm run build` in your terminal.
-2. Upload the files inside `dist/` to your `public_html` folder.
-3. Upload the `server/` folder to your website directory (e.g. `public_html/api`).
-4. Update `VITE_PHP_API_URL` to `https://yourdomain.com/api/api`.
-5. Done! The included `.htaccess` file handles all routing automatically.
-
----
-
-## 💬 Need Help?
-- **Groq API**: Free sign-up at [console.groq.com](https://console.groq.com).
-- **Node.js**: Ensure Node.js (v18 or higher) is installed on your computer.
-- **PHP**: Ensure PHP (v8.0 or higher) is installed.
+- [1. Architectural Foundation](#1-architectural-foundation)
+- [2. Multi-Agent Topology](#2-multi-agent-topology)
+- [3. Full System Interaction Flow](#3-full-system-interaction-flow)
+- [4. Deterministic ATS Scoring Equation & Weights](#4-deterministic-ats-scoring-equation--weights)
+- [5. Module Matrix & Functional Specifications](#5-module-matrix--functional-specifications)
+- [6. High-Frequency Interview Vault Architecture](#6-high-frequency-interview-vault-architecture)
+- [7. Dual-Engine Data Storage Topology](#7-dual-engine-data-storage-topology)
+- [8. Hardware & Browser Media Pipeline](#8-hardware--browser-media-pipeline)
+- [9. Quick Start & Execution Modes](#9-quick-start--execution-modes)
+- [10. Production Deployment Specifications](#10-production-deployment-specifications)
