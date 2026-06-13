@@ -47,3 +47,45 @@
 - [8. Hardware & Browser Media Pipeline](#8-hardware--browser-media-pipeline)
 - [9. Quick Start & Execution Modes](#9-quick-start--execution-modes)
 - [10. Production Deployment Specifications](#10-production-deployment-specifications)
+
+
+---
+
+## 1. Architectural Foundation
+
+Awaken.ai is built as a dual-tier distributed interview coaching engine. It decouples high-throughput client-side audio/video processing from deterministic evaluation pipelines and distributed AI inference nodes.
+
+```mermaid
+graph TB
+    subgraph Client_Workspace["Client Runtime (Vite + React 19 + TypeScript)"]
+        UI["WarMap Orchestrator UI"]
+        Sub1["NeuralLink Auth"]
+        Sub2["Voice Resume Wizard"]
+        Sub3["ATS Diagnostic Core"]
+        Sub4["Written Assessment Node"]
+        Sub5["Vault Simulator (AV Stream)"]
+        Sub6["Analytics Vault"]
+    end
+
+    subgraph Inference_Mesh["LLM Inference Mesh (Groq High-Speed Fabric)"]
+        M1["Primary: openai/gpt-oss-120b"]
+        M2["Fast: openai/gpt-oss-20b"]
+        M3["Fallback 1: llama-3.3-70b-versatile"]
+        M4["Fallback 2: llama-3.1-8b-instant"]
+    end
+
+    subgraph Persistence_Tier["Dual Backend & Persistence Plane"]
+        PHP["PHP 8.2+ High-Throughput REST Gateway"]
+        SQLITE[("Local SQLite Instance")]
+        MYSQL[("Production MySQL")]
+        SUPA[("Supabase Edge Authentication")]
+    end
+
+    UI --> Sub1 & Sub2 & Sub3 & Sub4 & Sub5 & Sub6
+    Sub2 & Sub3 & Sub4 & Sub5 --> Inference_Mesh
+    M1 -.->|Rate Limit / Timeout| M2 -.-> M3 -.-> M4
+    Sub1 & Sub2 & Sub3 & Sub4 & Sub6 --> PHP
+    PHP --> SQLITE
+    PHP --> MYSQL
+    Sub1 -.-> SUPA
+```
