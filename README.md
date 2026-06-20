@@ -1,32 +1,5 @@
 <p align="center">
-  <svg width="800" height="180" viewBox="0 0 800 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="800" height="180" rx="16" fill="#090D16"/>
-    <defs>
-      <linearGradient id="grid-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#1E293B" stop-opacity="0.6"/>
-        <stop offset="100%" stop-color="#0F172A" stop-opacity="0.2"/>
-      </linearGradient>
-      <linearGradient id="neon-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#38BDF8"/>
-        <stop offset="50%" stop-color="#6366F1"/>
-        <stop offset="100%" stop-color="#A855F7"/>
-      </linearGradient>
-      <pattern id="dot-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="1" fill="#334155" fill-opacity="0.4"/>
-      </pattern>
-    </defs>
-    <rect width="800" height="180" rx="16" fill="url(#dot-pattern)"/>
-    <path d="M 0 90 Q 200 40 400 90 T 800 90" stroke="url(#neon-cyan)" stroke-width="1.5" stroke-opacity="0.3" fill="none"/>
-    <rect x="40" y="32" width="110" height="26" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-    <text x="52" y="49" fill="#38BDF8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" letter-spacing="0.1em">SYSTEM CORE</text>
-    <text x="40" y="105" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="900" letter-spacing="-0.03em">AWAKEN.AI</text>
-    <text x="40" y="136" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500">Autonomous Interview Intelligence & High-Stakes Career Simulation Infrastructure</text>
-    <circle cx="730" cy="90" r="42" stroke="#1E293B" stroke-width="2" fill="#0B132B"/>
-    <circle cx="730" cy="90" r="28" stroke="#38BDF8" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
-    <circle cx="730" cy="90" r="8" fill="#6366F1"/>
-    <line x1="688" y1="90" x2="772" y2="90" stroke="#334155" stroke-width="1"/>
-    <line x1="730" y1="48" x2="730" y2="132" stroke="#334155" stroke-width="1"/>
-  </svg>
+  <img src="assets/hero_banner.svg" alt="Awaken.ai Hero Banner" width="800" />
 </p>
 
 <p align="center">
@@ -42,7 +15,7 @@
 ## Technical Index
 
 - [1. Architectural Foundation](#1-architectural-foundation)
-- [2. Multi-Agent Topology](#2-multi-agent-topology)
+- [2. Multi-Agent Topology & Neural Dispatch](#2-multi-agent-topology--neural-dispatch)
 - [3. Full System Interaction Flow](#3-full-system-interaction-flow)
 - [4. Deterministic ATS Scoring Equation & Weights](#4-deterministic-ats-scoring-equation--weights)
 - [5. Module Matrix & Functional Specifications](#5-module-matrix--functional-specifications)
@@ -95,50 +68,40 @@ graph TB
 
 ---
 
-## 2. Multi-Agent Topology
+## 2. Multi-Agent Topology & Neural Dispatch
 
 The platform coordinates five specialized neural agents configured with distinct system prompts, operational tones, and domain tasks:
 
 <p align="center">
-  <svg width="780" height="230" viewBox="0 0 780 230" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="780" height="230" rx="12" fill="#0B0F19" stroke="#1E293B"/>
-    
-    <!-- Node 1 -->
-    <rect x="25" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/>
-    <rect x="40" y="45" width="24" height="24" rx="6" fill="#0369A1"/>
-    <text x="40" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Orchestrator</text>
-    <text x="40" y="108" fill="#38BDF8" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">STATE HARMONY</text>
-    <text x="40" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Manages session cross-sync, module telemetry, and context persistence.</text>
-
-    <!-- Node 2 -->
-    <rect x="175" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#6366F1" stroke-width="1.5"/>
-    <rect x="190" y="45" width="24" height="24" rx="6" fill="#4338CA"/>
-    <text x="190" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Auditor</text>
-    <text x="190" y="108" fill="#818CF8" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">ATS SCANNER</text>
-    <text x="190" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Forensically parses structure, action verbs, and skill density gap.</text>
-
-    <!-- Node 3 -->
-    <rect x="325" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
-    <rect x="340" y="45" width="24" height="24" rx="6" fill="#047857"/>
-    <text x="340" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Architect</text>
-    <text x="340" y="108" fill="#34D399" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">VOICE BUILDER</text>
-    <text x="340" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Converts spoken narrative and unstructured oral input to structured ATS resumes.</text>
-
-    <!-- Node 4 -->
-    <rect x="475" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#F43F5E" stroke-width="1.5"/>
-    <rect x="490" y="45" width="24" height="24" rx="6" fill="#BE123C"/>
-    <text x="490" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Adversary</text>
-    <text x="490" y="108" fill="#FB7185" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">INTERVIEW SIM</text>
-    <text x="490" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Executes rigorous technical probing, dynamic pressure tests, and follow-ups.</text>
-
-    <!-- Node 5 -->
-    <rect x="625" y="30" width="130" height="170" rx="10" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/>
-    <rect x="640" y="45" width="24" height="24" rx="6" fill="#B45309"/>
-    <text x="640" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Coach</text>
-    <text x="640" y="108" fill="#FBBF24" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">SPEECH ANALYTICS</text>
-    <text x="640" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Monitors answer conciseness, verbal filler rate, and vocal confidence signals.</text>
-  </svg>
+  <img src="assets/multi_agent_topology.svg" alt="Multi-Agent Topology" width="780" />
 </p>
+
+```mermaid
+graph LR
+    subgraph Agent_Cluster["Specialized Neural Agents"]
+        direction TB
+        A1["Orchestrator<br/>Tone: Supportive<br/>Task: State Harmony"]
+        A2["Resume Auditor<br/>Tone: Analytical<br/>Task: Forensic Parsing"]
+        A3["Resume Architect<br/>Tone: Supportive<br/>Task: Oral Extraction"]
+        A4["Mock Interviewer<br/>Tone: Adversarial<br/>Task: Pressure Probing"]
+        A5["Speech Coach<br/>Tone: Analytical<br/>Task: Cadence Metrics"]
+    end
+
+    subgraph Module_Target["Target WarMap Modules"]
+        direction TB
+        T1["WarMap Dashboard State"]
+        T2["ATS Scanner (ResumeBuilder.tsx)"]
+        T3["Oral Profile (VoiceResumeBuilder.tsx)"]
+        T4["High-Stakes Sim (VaultSimulator.tsx)"]
+        T5["Audio Analytics Stream"]
+    end
+
+    A1 --> T1
+    A2 --> T2
+    A3 --> T3
+    A4 --> T4
+    A5 --> T5
+```
 
 | Agent Identifier | Tactical Persona | Operational Tone | Primary Functionality | Core Dependency |
 | :--- | :--- | :--- | :--- | :--- |
@@ -201,45 +164,7 @@ sequenceDiagram
 The ATS algorithm calculates an audit score bounded between `0` and `100` points using a four-factor deterministic equation coupled with LLM contextual validation:
 
 <p align="center">
-  <svg width="780" height="200" viewBox="0 0 780 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="780" height="200" rx="12" fill="#0B0F19" stroke="#1E293B"/>
-    
-    <!-- Weight Bar Container -->
-    <rect x="40" y="35" width="700" height="28" rx="6" fill="#1E293B"/>
-    <rect x="40" y="35" width="280" height="28" rx="6" fill="#38BDF8"/>
-    <rect x="320" y="35" width="175" height="28" fill="#6366F1"/>
-    <rect x="495" y="35" width="140" height="28" fill="#10B981"/>
-    <rect x="635" y="35" width="105" height="28" rx="0 6 6 0" fill="#F59E0B"/>
-
-    <!-- Labels on Bar -->
-    <text x="145" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">KEYWORDS: 40%</text>
-    <text x="365" y="54" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">STRUCTURE: 25%</text>
-    <text x="525" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">IMPACT: 20%</text>
-    <text x="655" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">VERBS: 15%</text>
-
-    <!-- Legend Blocks -->
-    <g transform="translate(40, 85)">
-      <!-- Item 1 -->
-      <circle cx="8" cy="8" r="6" fill="#38BDF8"/>
-      <text x="22" y="12" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Keyword Alignment (40 Points)</text>
-      <text x="22" y="30" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Bi-gram and tri-gram n-gram extraction against target job specification.</text>
-
-      <!-- Item 2 -->
-      <circle cx="370" cy="8" r="6" fill="#6366F1"/>
-      <text x="384" y="12" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Structural Integrity (25 Points)</text>
-      <text x="384" y="30" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Experience, Education, Skills, Projects, Summary, and Contact headers.</text>
-
-      <!-- Item 3 -->
-      <circle cx="8" cy="65" r="6" fill="#10B981"/>
-      <text x="22" y="69" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Quantifiable Metrics (20 Points)</text>
-      <text x="22" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Revenue figures, percent increases, user counts, and engineering scale.</text>
-
-      <!-- Item 4 -->
-      <circle cx="370" cy="65" r="6" fill="#F59E0B"/>
-      <text x="384" y="69" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Action Verb Density (15 Points)</text>
-      <text x="384" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Active leadership verbs checked against 100+ high-impact terms corpus.</text>
-    </g>
-  </svg>
+  <img src="assets/ats_weights_gauge.svg" alt="ATS Scoring Weights" width="780" />
 </p>
 
 ### Formula Definition
@@ -390,50 +315,35 @@ stateDiagram-v2
 The platform provides complete operational capability in both online and air-gapped / offline configurations:
 
 <p align="center">
-  <svg width="780" height="220" viewBox="0 0 780 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="780" height="220" rx="12" fill="#0B0F19" stroke="#1E293B"/>
-    
-    <!-- Left Box: Client -->
-    <rect x="30" y="30" width="210" height="160" rx="10" fill="#0F172A" stroke="#38BDF8"/>
-    <text x="50" y="60" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Client Local Storage</text>
-    <text x="50" y="80" fill="#38BDF8" font-family="-apple-system, sans-serif" font-size="10">OFFLINE RESILIENCE</text>
-    <text x="50" y="105" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">awaken_php_token</text>
-    <text x="50" y="125" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">awaken-profile-{uid}</text>
-    <text x="50" y="145" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">awaken-roadmap-progress</text>
-    <text x="50" y="165" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">awaken-assistant-muted</text>
-
-    <!-- Arrow 1 -->
-    <path d="M 240 110 L 290 110" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 2"/>
-    <polygon points="290,105 300,110 290,115" fill="#38BDF8"/>
-
-    <!-- Middle Box: PHP Server -->
-    <rect x="300" y="30" width="180" height="160" rx="10" fill="#0F172A" stroke="#6366F1"/>
-    <text x="320" y="60" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">PHP 8.2+ Gateway</text>
-    <text x="320" y="80" fill="#818CF8" font-family="-apple-system, sans-serif" font-size="10">REST API DISPATCHER</text>
-    <text x="320" y="105" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Bearer Token Auth</text>
-    <text x="320" y="125" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">CORS Preflight Policy</text>
-    <text x="320" y="145" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Visual Admin Viewer</text>
-    <text x="320" y="165" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Automatic Schema Init</text>
-
-    <!-- Arrow 2 -->
-    <path d="M 480 85 L 530 65" stroke="#10B981" stroke-width="2"/>
-    <polygon points="530,60 539,64 532,70" fill="#10B981"/>
-    <path d="M 480 135 L 530 155" stroke="#F59E0B" stroke-width="2"/>
-    <polygon points="532,150 539,156 530,160" fill="#F59E0B"/>
-
-    <!-- Right Box: SQLite -->
-    <rect x="540" y="30" width="210" height="70" rx="8" fill="#0F172A" stroke="#10B981"/>
-    <text x="560" y="55" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">SQLite (Zero Setup)</text>
-    <text x="560" y="72" fill="#34D399" font-family="-apple-system, sans-serif" font-size="10">Local server/database.sqlite</text>
-    <text x="560" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">WAL Mode, Auto-initialization</text>
-
-    <!-- Right Box: MySQL -->
-    <rect x="540" y="120" width="210" height="70" rx="8" fill="#0F172A" stroke="#F59E0B"/>
-    <text x="560" y="145" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">MySQL (Production)</text>
-    <text x="560" y="162" fill="#FBBF24" font-family="-apple-system, sans-serif" font-size="10">cPanel / Hostinger / Cloud SQL</text>
-    <text x="560" y="177" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Configured via environment variables</text>
-  </svg>
+  <img src="assets/storage_topology.svg" alt="Storage Topology" width="780" />
 </p>
+
+```mermaid
+graph TB
+    subgraph Client_Boundary["Client Execution Context"]
+        LS["localStorage Engine<br/>- awaken_php_token<br/>- awaken-profile-{uid}<br/>- awaken-roadmap-progress"]
+        APICLI["BackendClient (src/lib/api.ts)<br/>Offline Fallback Handler"]
+    end
+
+    subgraph Backend_Gateway["PHP 8.2+ Gateway (server/index.php)"]
+        AUTH["Bearer Token Middleware"]
+        ROUTES["REST Endpoints (/api/profile, /api/scans, /api/tests)"]
+        ADMIN["Visual Admin Dashboard (/admin)"]
+    end
+
+    subgraph Database_Layer["Storage Targets"]
+        SQLITE[("SQLite Database<br/>server/database.sqlite<br/>WAL Journal Mode")]
+        MYSQL[("Production MySQL<br/>cPanel / Cloud SQL<br/>UTF-8mb4 Charset")]
+    end
+
+    LS <--> APICLI
+    APICLI -->|HTTP Authorization: Bearer| AUTH
+    AUTH --> ROUTES
+    ROUTES --> SQLITE
+    ROUTES --> MYSQL
+    ADMIN --> SQLITE
+    ADMIN --> MYSQL
+```
 
 ### Database Table Schemas
 
