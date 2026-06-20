@@ -73,7 +73,7 @@ graph TB
 The platform coordinates five specialized neural agents configured with distinct system prompts, operational tones, and domain tasks:
 
 <p align="center">
-  <img src="assets/multi_agent_topology.svg" alt="Multi-Agent Topology" width="780" />
+  <img src="assets/multi_agent_topology.svg" alt="Multi-Agent Topology Node Matrix" width="780" />
 </p>
 
 ```mermaid
