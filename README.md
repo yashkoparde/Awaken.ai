@@ -135,3 +135,50 @@ The platform coordinates five specialized neural agents configured with distinct
 | `resume_architect` | Resume Architect | Supportive | Synthesizes oral responses into high-density ATS bullets | `src/lib/groq.ts` |
 | `vault_adversary` | Mock Interviewer | Adversarial | Runs multi-turn high-stakes technical interrogation | `src/components/VaultSimulator.tsx` |
 | `comm_coach` | Speech Coach | Analytical | Evaluates audio cadence, latency, and pacing metrics | Web Speech Recognition API |
+
+
+---
+
+## 3. Full System Interaction Flow
+
+The operational sequence illustrates how a candidate authenticates, conducts an ATS analysis, undergoes a simulated interview round, and compiles an executive evaluation report:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Candidate as Candidate
+    participant UI as WarMap Dashboard
+    participant ATS as ATS Engine (Math + NLP)
+    participant LLM as Groq Inference Mesh
+    participant Backend as PHP REST Service
+    participant Storage as SQLite / MySQL DB
+
+    Candidate->>UI: Submit credentials at NeuralLink
+    UI->>Backend: POST /api/login {email, password}
+    Backend->>Storage: Verify hash & query candidate
+    Storage-->>Backend: Account record & auth token
+    Backend-->>UI: Return JWT token & cached profile
+    UI-->>Candidate: Render WarMap Mission Interface
+
+    Candidate->>UI: Upload resume file & job description
+    UI->>ATS: Execute deterministic lexical tokenization
+    ATS-->>UI: Calculate keyword density, structure & metrics
+    UI->>LLM: Dispatch audit prompt with extracted tokens
+    LLM-->>UI: Return critical review & optimized bullet points
+    UI->>Backend: POST /api/scans {scores, serialized analysis}
+    Backend->>Storage: Persist ATS record to resume_scans
+
+    Candidate->>UI: Launch Vault Simulator (Mock Interview)
+    UI->>Candidate: Capture Video & Audio streams
+    Candidate->>UI: Speak response (Speech-to-Text streaming)
+    UI->>LLM: Multi-turn prompt + conversation memory
+    LLM-->>UI: Synthesize adversarial follow-up question
+    UI->>Candidate: Play synthetic speech & render transcript
+
+    Candidate->>UI: Navigate to Analytics Vault
+    UI->>Backend: GET /api/scans & GET /api/tests
+    Backend->>Storage: Read candidate audit timeline
+    Storage-->>Backend: Return chronological datasets
+    Backend-->>UI: Render Recharts AreaChart & KPI Gauges
+    UI-->>Candidate: Export formal Candidate Evaluation Report
+```
