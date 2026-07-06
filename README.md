@@ -73,12 +73,12 @@ graph TB
 The platform coordinates five specialized neural agents configured with distinct system prompts, operational tones, and domain tasks:
 
 <p align="center">
-  <img src="assets/multi_agent_topology.svg" alt="Multi-Agent Topology Node Matrix" width="780" />
+  <img src="assets/multi_agent_topology.svg" alt="Multi-Agent Topology" width="780" />
 </p>
 
 ```mermaid
 graph LR
-    subgraph Agent_Cluster["Specialized Neural Agents"]
+    subgraph Agent_Cluster["Specialized Neural Agent Cluster"]
         direction TB
         A1["Orchestrator<br/>Tone: Supportive<br/>Task: State Harmony"]
         A2["Resume Auditor<br/>Tone: Analytical<br/>Task: Forensic Parsing"]
