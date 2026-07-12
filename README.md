@@ -182,3 +182,45 @@ sequenceDiagram
     Backend-->>UI: Render Recharts AreaChart & KPI Gauges
     UI-->>Candidate: Export formal Candidate Evaluation Report
 ```
+
+
+---
+
+## 4. Deterministic ATS Scoring Equation & Weights
+
+The ATS algorithm calculates an audit score bounded between `0` and `100` points using a four-factor deterministic equation coupled with LLM contextual validation:
+
+<p align="center">
+  <svg width="780" height="200" viewBox="0 0 780 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="780" height="200" rx="12" fill="#0B0F19" stroke="#1E293B"/>
+    <rect x="40" y="35" width="700" height="28" rx="6" fill="#1E293B"/>
+    <rect x="40" y="35" width="280" height="28" rx="6" fill="#38BDF8"/>
+    <rect x="320" y="35" width="175" height="28" fill="#6366F1"/>
+    <rect x="495" y="35" width="140" height="28" fill="#10B981"/>
+    <rect x="635" y="35" width="105" height="28" rx="0 6 6 0" fill="#F59E0B"/>
+    <text x="145" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">KEYWORDS: 40%</text>
+    <text x="365" y="54" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">STRUCTURE: 25%</text>
+    <text x="525" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">IMPACT: 20%</text>
+    <text x="655" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">VERBS: 15%</text>
+    <g transform="translate(40, 85)">
+      <circle cx="8" cy="8" r="6" fill="#38BDF8"/>
+      <text x="22" y="12" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Keyword Alignment (40 Points)</text>
+      <text x="22" y="30" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Bi-gram and tri-gram n-gram extraction against target job specification.</text>
+      <circle cx="370" cy="8" r="6" fill="#6366F1"/>
+      <text x="384" y="12" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Structural Integrity (25 Points)</text>
+      <text x="384" y="30" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Experience, Education, Skills, Projects, Summary, and Contact headers.</text>
+      <circle cx="8" cy="65" r="6" fill="#10B981"/>
+      <text x="22" y="69" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Quantifiable Metrics (20 Points)</text>
+      <text x="22" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Revenue figures, percent increases, user counts, and engineering scale.</text>
+      <circle cx="370" cy="65" r="6" fill="#F59E0B"/>
+      <text x="384" y="69" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Action Verb Density (15 Points)</text>
+      <text x="384" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Active leadership verbs checked against 100+ high-impact terms corpus.</text>
+    </g>
+  </svg>
+</p>
+
+### Formula Definition
+
+```text
+Final ATS Score = (KeywordScore * 0.40) + (StructureScore * 0.25) + (ImpactScore * 0.20) + (VerbScore * 0.15)
+```
