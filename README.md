@@ -224,3 +224,98 @@ The ATS algorithm calculates an audit score bounded between `0` and `100` points
 ```text
 Final ATS Score = (KeywordScore * 0.40) + (StructureScore * 0.25) + (ImpactScore * 0.20) + (VerbScore * 0.15)
 ```
+
+
+---
+
+## 5. Module Matrix & Functional Specifications
+
+The WarMap interface hosts nine specialized modules accessible via sidebar navigation and keyboard hotkeys (`Alt+1` through `Alt+9`):
+
+```mermaid
+graph LR
+    subgraph Core_Navigation["WarMap 9-Node Navigation Grid"]
+        direction TB
+        N1["1. Onboarding & Target Roles"]
+        N2["2. Voice Resume Builder"]
+        N3["3. Hybrid ATS Scanner"]
+        N4["4. Practice Q&A Generator"]
+        N5["5. Written Assessment Test"]
+        N6["6. High-Stakes Vault Simulator"]
+        N7["7. Curated Learning Hub"]
+        N8["8. Career Roadmap Matrix"]
+        N9["9. Performance Analytics"]
+    end
+
+    subgraph Data_Flow["Data Exchange Plane"]
+        D1["Candidate Profile State"]
+        D2["Generated Speech-to-Markdown"]
+        D3["4-Part Forensic Breakdown"]
+        D4["Multi-Turn Q&A History"]
+        D5["Timed Evaluation Result"]
+        D6["Webcam & Audio AV Stream"]
+        D7["Dynamic Role Curations"]
+        D8["Milestone Task Progress"]
+        D9["Recharts Historical Trendlines"]
+    end
+
+    N1 --> D1
+    N2 --> D2
+    N3 --> D3
+    N4 --> D4
+    N5 --> D5
+    N6 --> D6
+    N7 --> D7
+    N8 --> D8
+    N9 --> D9
+```
+
+<details>
+<summary><strong>Detailed Module Breakdown (Click to Expand)</strong></summary>
+
+### Node 1: Onboarding (`ProfileSetup.tsx`)
+- Captures candidate experience tiers: `Entry Level`, `Mid Level`, `Senior`, `Staff / Lead`, and `Principal`.
+- Normalizes external platform handles: GitHub, LinkedIn, LeetCode, Codeforces, and portfolio domains.
+- Dual-persists state into user-scoped `localStorage` keys and the backend `profiles` database table.
+
+### Node 2: Voice Resume (`VoiceResumeBuilder.tsx`)
+- 5-step guided wizard: resume presence check, text extractor, summary reviewer, social links, and oral questions.
+- Browser SpeechRecognition pipeline with volume-reactive animated waveform visualizer.
+- Generates compliant ATS markdown resumes with one-click clipboard copy and `.txt` blob export.
+
+### Node 3: ATS Scanner (`ResumeBuilder.tsx`)
+- Client-side drag-and-drop document upload with Base64 document parser.
+- Deterministic 4-part scoring combined with Groq LLM deep forensic gap review.
+- Suggests categorized missing skills across programming, aptitude, soft skills, and systems knowledge.
+
+### Node 4: Practice Q&A (`QAGenerator.tsx`)
+- Generates role-specific behavioral and technical interview questions based on candidate profile.
+- Displays ideal answer outlines with bulleted evaluation criteria.
+- Hosts an interactive follow-up chat thread beneath each question for conversational deep dives.
+
+### Node 5: Written Test (`WrittenTest.tsx`)
+- Dynamic MCQ examination generator across Coding, SQL, Aptitude, Verbal, and System Design topics.
+- Automated client-side scoring engine with instant rationale display for incorrect selections.
+- Automatically synchronizes finished test scores to the backend `test_scores` table.
+
+### Node 6: Vault Simulator (`VaultSimulator.tsx`)
+- Multi-round high-stakes simulator covering Technical, Behavioral, HR, and Role-Specific rounds.
+- Video webcam streaming via `getUserMedia` with optional in-memory `MediaRecorder` video capture.
+- Configurable countdown timer with animated pulse indicator.
+
+### Node 7: Resource Finder (`ResourceFinder.tsx`)
+- Pre-compiled engineering curriculum (System Design Primer, MDN Advanced JS, CS Interview University).
+- Real-time client-side search query indexer filtering titles, descriptions, and domains.
+- Groq AI integration dynamically discovering targeted resources matching candidate profile goals.
+
+### Node 8: Career Roadmap (`CareerRoadmap.tsx`)
+- Generates 5 distinct career progression milestones customized to candidate domain and seniority.
+- Interactive task completion checklists with persistent state tracking.
+- Visual milestone progression tracker calculating percentage readiness towards target roles.
+
+### Node 9: Performance Analytics (`AnalyticsVault.tsx`)
+- High-resolution Recharts historical AreaChart tracking readiness progression over time.
+- KPI cards computing aggregate technical depth, readiness index, and assessment counts.
+- Executive Candidate Evaluation Report generator supporting native print styles and JSON data export.
+
+</details>
