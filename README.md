@@ -78,7 +78,7 @@ The platform coordinates five specialized neural agents configured with distinct
 
 ```mermaid
 graph LR
-    subgraph Agent_Cluster["Specialized Neural Agent Cluster"]
+    subgraph Agent_Cluster["Specialized Neural Agents"]
         direction TB
         A1["Orchestrator<br/>Tone: Supportive<br/>Task: State Harmony"]
         A2["Resume Auditor<br/>Tone: Analytical<br/>Task: Forensic Parsing"]
@@ -171,6 +171,7 @@ The ATS algorithm calculates an audit score bounded between `0` and `100` points
 
 ```text
 Final ATS Score = (KeywordScore * 0.40) + (StructureScore * 0.25) + (ImpactScore * 0.20) + (VerbScore * 0.15)
+// Scaled strictly on [0, 100] interval
 ```
 
 Where:
