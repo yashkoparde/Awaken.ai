@@ -319,3 +319,39 @@ graph LR
 - Executive Candidate Evaluation Report generator supporting native print styles and JSON data export.
 
 </details>
+
+
+---
+
+## 6. High-Frequency Interview Vault Architecture
+
+The Vault Simulator operates as an integrated hardware and AI feedback loop:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle_State: Initialize Module
+
+    state "Session Setup" as Setup {
+        Select_Round: Select Round (Technical / HR / Behavioral)
+        Check_Hardware: Request Camera & Mic Permissions
+        Start_Timer: Initialize Session Clock (5000s)
+    }
+
+    state "Active Interrogation Loop" as Loop {
+        Interviewer_Speaks: Voice Synthesizer Generates Question
+        Candidate_Records: Web Speech API Streams Spoken Response
+        Thinking_Indicator: Groq Model Computes Adversarial Probing
+    }
+
+    state "Round Finalization" as Final {
+        Evaluate_Performance: Compute Depth & Coherence
+        Persist_Metrics: Write Telemetry to Backend
+        Render_Summary: Display Diagnostic Overview
+    }
+
+    Idle_State --> Setup
+    Setup --> Loop
+    Loop --> Loop: Next Question Turn
+    Loop --> Final: Complete All Questions / End Early
+    Final --> [*]
+```
