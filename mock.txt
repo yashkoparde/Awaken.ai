@@ -1,0 +1,279 @@
+================================================================================
+AWAKEN.AI - MOCK ACCOUNTS & REFERENCE BENCHMARK DATA
+================================================================================
+CONFIDENTIAL: Internal testing, evaluator sandbox verification & QA access.
+NOTE: Mock account credentials are not displayed on the UI. Use the credentials
+below to authenticate directly into the Awaken.ai portal.
+================================================================================
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------------------
+1. MOCK USER ACCOUNTS & CREDENTIALS
+2. CANDIDATE PROFILE SPECIFICATIONS & ATTRIBUTES
+3. CAREER ROADMAP & MILESTONE COMPLETION STATES
+4. SIMULATION DATA & BENCHMARKS (VAULT SIMULATOR)
+5. ORAL RESUME BUILDER BENCHMARK DATA
+6. Q&A GENERATOR & WRITTEN TEST REFERENCE DATA
+7. TESTING PROCEDURES & SESSION PERSISTENCE
+
+
+================================================================================
+1. MOCK USER ACCOUNTS & CREDENTIALS
+================================================================================
+
+[ACCOUNT 1 - DEFAULT PRIMARY CANDIDATE]
+- Role: Senior Full-Stack AI Engineer
+- Email: candidate@awaken.ai
+- Password: candidate123
+- User ID: mock_candidate_user_123
+- Access Tier: Senior / Staff Candidate Sandbox
+- Status: Active / In-Progress Milestones
+
+[ACCOUNT 2 - DISTRIBUTED SYSTEMS ARCHITECT]
+- Role: Principal Distributed Systems Architect
+- Email: architect@awaken.ai
+- Password: architect123
+- User ID: mock_architect_user_456
+- Access Tier: Principal / Tech Fellow
+- Status: Fully Certified (100% Roadmap Completed)
+
+[ACCOUNT 3 - PRODUCT & DESIGN TECHNOLOGIST]
+- Role: Lead Product & UX Technologist
+- Email: designer@awaken.ai
+- Password: designer123
+- User ID: mock_designer_user_789
+- Access Tier: Staff Design Engineer
+- Status: Design Systems & Interaction Track
+
+[ACCOUNT 4 - ML RESEARCH SCIENTIST]
+- Role: Staff Machine Learning Research Scientist
+- Email: scientist@awaken.ai
+- Password: scientist123
+- User ID: mock_scientist_user_101
+- Access Tier: Principal AI/ML Researcher
+- Status: Deep Learning Alignment & Multimodal Track
+
+
+================================================================================
+2. CANDIDATE PROFILE SPECIFICATIONS & ATTRIBUTES
+================================================================================
+
+--------------------------------------------------------------------------------
+PROFILE 1: Yash Koparde
+--------------------------------------------------------------------------------
+- Full Name: Yash Koparde
+- Email: candidate@awaken.ai
+- Current Title: Senior Full-Stack AI Engineer
+- Experience Level: 5+ years
+- Primary Domain: Distributed Systems, Agentic AI Infrastructure & Modern React
+- Target Companies: Google, OpenAI, Anthropic, DeepMind
+- Target Level: Senior / Staff Engineer
+- Technical Skills:
+  TypeScript, React 19, Python, PyTorch, Supabase, LLM Agent Workflows,
+  Node.js, GraphQL, Docker, Kubernetes, WebRTC, Tailwind CSS, Three.js
+- Professional Bio:
+  "Senior full-stack engineer specializing in agentic AI pipelines, real-time
+  interactive applications, and resilient distributed microservices. Proven
+  track record of architecting sub-second streaming inference platforms and
+  responsive client-side interfaces."
+- Portfolio / Social Links:
+  LinkedIn: https://linkedin.com/in/yash-koparde
+  GitHub: https://github.com/yashkoparde
+
+--------------------------------------------------------------------------------
+PROFILE 2: Elena Rostova
+--------------------------------------------------------------------------------
+- Full Name: Elena Rostova
+- Email: architect@awaken.ai
+- Current Title: Principal Distributed Systems Architect
+- Experience Level: 10+ years
+- Primary Domain: Cloud Infrastructure, Distributed Consensus & High-Throughput Streaming
+- Target Companies: Stripe, AWS, Cloudflare, Netflix
+- Target Level: Principal Systems Architect / Tech Fellow
+- Technical Skills:
+  System Design, Rust, Go, Apache Kafka, Apache Cassandra, gRPC, eBPF,
+  Kubernetes, Chaos Engineering, Raft/Paxos Consensus, AWS, GCP
+- Professional Bio:
+  "Principal systems architect with over a decade of expertise architecting
+  petabyte-scale event streaming pipelines and ultra-low-latency distributed
+  consensus engines with 99.999% availability guarantees."
+- Portfolio / Social Links:
+  LinkedIn: https://linkedin.com/in/elena-rostova-arch
+  GitHub: https://github.com/elena-rostova
+
+--------------------------------------------------------------------------------
+PROFILE 3: Marcus Chen
+--------------------------------------------------------------------------------
+- Full Name: Marcus Chen
+- Email: designer@awaken.ai
+- Current Title: Lead Product & UX Technologist
+- Experience Level: 7+ years
+- Primary Domain: Design Systems, Spatial Interfaces & Human-AI Interaction
+- Target Companies: Apple, Figma, Linear, Vercel
+- Target Level: Staff Product Designer / Lead UX Technologist
+- Technical Skills:
+  Design Systems Architecture, Figma Tokens, Typography, Motion UI, WebGL,
+  Three.js, WCAG AAA Accessibility, Tailwind CSS, Rapid Prototyping
+- Professional Bio:
+  "Design engineer bridging the gap between spatial UI aesthetics and production
+  systems. Specializes in building design tokens, tactile feedback micro-interactions,
+  and accessible AI copilot surfaces."
+- Portfolio / Social Links:
+  LinkedIn: https://linkedin.com/in/marcus-chen-ux
+  GitHub: https://github.com/marcus-chen
+
+--------------------------------------------------------------------------------
+PROFILE 4: Dr. Sophia Patel
+--------------------------------------------------------------------------------
+- Full Name: Dr. Sophia Patel
+- Email: scientist@awaken.ai
+- Current Title: Staff Machine Learning Research Scientist
+- Experience Level: 6+ years
+- Primary Domain: Applied Deep Learning, NLP Alignment & Multimodal Inference
+- Target Companies: DeepMind, Meta FAIR, Anthropic, Cohere
+- Target Level: Staff / Principal Research Scientist
+- Technical Skills:
+  PyTorch, JAX, Reinforcement Learning (RLHF/DPO/KTO), Transformer Architectures,
+  CUDA Kernel Optimization, Vector Databases, Python, C++, vLLM, TensorRT-LLM
+- Professional Bio:
+  "ML researcher and scientist focused on reasoning alignment, multimodal inference
+  acceleration, and model evaluation metrics. Published author on speculative decoding
+  and preference optimization."
+- Portfolio / Social Links:
+  LinkedIn: https://linkedin.com/in/sophia-patel-ml
+  GitHub: https://github.com/sophia-patel
+
+
+================================================================================
+3. CAREER ROADMAP & MILESTONE COMPLETION STATES
+================================================================================
+
+[STAGE 1: FOUNDATION & ALIGNMENT]
+- 1-1: Initialize core candidate telemetry & verified target roles
+  [candidate: COMPLETED] [architect: COMPLETED] [designer: COMPLETED] [scientist: COMPLETED]
+- 1-2: Establish baseline technical radar and skill gap diagnosis
+  [candidate: COMPLETED] [architect: COMPLETED] [designer: COMPLETED] [scientist: COMPLETED]
+
+[STAGE 2: SYSTEM ARCHITECTURE & DOMAIN DEPTH]
+- 2-1: High-concurrency architectural patterns & trade-off analysis
+  [candidate: COMPLETED] [architect: COMPLETED] [designer: COMPLETED] [scientist: COMPLETED]
+- 2-2: Fault tolerance, resilience, and distributed state management
+  [candidate: PENDING]   [architect: COMPLETED] [designer: COMPLETED] [scientist: COMPLETED]
+
+[STAGE 3: LIVE CODING & DATA STRUCTURE MASTERY]
+- 3-1: Complex algorithmic challenges under hard memory/time constraints
+  [candidate: COMPLETED] [architect: COMPLETED] [designer: PENDING]   [scientist: COMPLETED]
+- 3-2: API contract design, schema validation, and edge case resilience
+  [candidate: PENDING]   [architect: COMPLETED] [designer: COMPLETED] [scientist: COMPLETED]
+
+[STAGE 4: BEHAVIORAL & EXECUTIVE PRESENCE]
+- 4-1: Executive STAR narrative refinement and cross-functional conflict resolution
+  [candidate: COMPLETED] [architect: COMPLETED] [designer: COMPLETED] [scientist: COMPLETED]
+
+[STAGE 5: FULL-SPECTRUM SIMULATION DEPLOYMENT]
+- 5-1: High-stakes live mock interview with autonomous AI interrupter & telemetry
+  [candidate: PENDING]   [architect: COMPLETED] [designer: PENDING]   [scientist: PENDING]
+
+
+================================================================================
+4. SIMULATION DATA & BENCHMARKS (VAULT SIMULATOR)
+================================================================================
+
+[BENCHMARK EVALUATION METRICS]
+- Candidate Overall Readiness Index: 88.4 / 100
+- Technical Accuracy & Domain Precision: 92%
+- Structural Communication (STAR Format adherence): 86%
+- Stress Resilience & Interruption Recovery: 84%
+- Time-to-Clarity (Average first-principle statement latency): 3.2 seconds
+- Non-Verbal Telemetry & Eye Contact Confidence: 91%
+
+[SAMPLE INTERVIEW TRANSCRIPTS & SCENARIOS]
+Scenario A: "How do you handle split-brain in a multi-region distributed datastore?"
+- Candidate Answer Outline:
+  1. Define partition tolerance limits per CAP theorem.
+  2. Explain quorum-based consensus (Raft leader leasing) vs CRDT eventual consistency.
+  3. Discuss fencing tokens and generation counters to invalidate stale writes.
+  4. Address reconciliation pipelines and conflict resolution heuristics.
+
+Scenario B: "Walk me through an architectural trade-off where you chose simplicity over perfection."
+- Candidate Answer Outline:
+  1. Context: Real-time candidate telemetry synchronization under heavy burst load.
+  2. Options considered: Dedicated Kafka cluster + Flink vs managed serverless queue + Postgres CDC.
+  3. Decision: Chose managed streaming queue to decrease operational overhead by 80%.
+  4. Impact: Shipped 4 weeks earlier with zero downtime and <50ms median latency.
+
+
+================================================================================
+5. ORAL RESUME BUILDER BENCHMARK DATA
+================================================================================
+
+[RESUME CONTENT DATA SPECIFICATION]
+- Summary Statement:
+  "Versatile technical lead and AI engineer with 5+ years driving high-velocity
+  software delivery. Engineered multi-agent AI workflows, scalable cloud-native
+  backends, and responsive design systems. Passionate about bringing clarity,
+  rigor, and human-centered design to mission-critical platforms."
+
+- Featured Work Experience:
+  1. Senior Full-Stack AI Engineer | HyperScale AI (2022 - Present)
+     - Designed and scaled an autonomous LLM workflow engine processing 12M+ tokens/day.
+     - Reduced end-to-end user latency from 1.8s to 240ms using streaming websockets and speculative pre-warming.
+     - Mentored 6 mid-level engineers in distributed system patterns and modern React practices.
+
+  2. Software Engineer | CloudVanguard Labs (2020 - 2022)
+     - Built real-time analytics dashboards utilizing React, TypeScript, and WebSockets.
+     - Implemented PostgreSQL query optimizations saving $45K monthly infrastructure spend.
+     - Integrated OAuth2/SSO with role-based access control across enterprise client accounts.
+
+- Education:
+  - B.Tech in Computer Science & Engineering | Top 5% Honors
+
+
+================================================================================
+6. Q&A GENERATOR & WRITTEN TEST REFERENCE DATA
+================================================================================
+
+[SAMPLE TECHNICAL QUESTIONS & ANSWERS]
+
+Q1: What is the core difference between optimistic and pessimistic locking?
+A1: Optimistic locking assumes multiple transactions can complete without affecting
+    each other, verifying record version stamps at commit time. Pessimistic locking
+    places exclusive locks on data records upfront, preventing concurrent access
+    until release. Optimistic locking excels in read-heavy, low-contention environments.
+
+Q2: How does React 19 handle concurrent rendering and server actions?
+A2: React 19 leverages asynchronous transitions, automatic batching, and native
+    action hooks (`useActionState`, `useOptimistic`) to manage pending states
+    without manual loading flags, enabling fluid non-blocking UI interactions.
+
+Q3: Explain how vector databases perform Approximate Nearest Neighbor (ANN) search.
+A3: Vector databases utilize algorithms like HNSW (Hierarchical Navigable Small World)
+    and IVF (Inverted File Index) to construct navigable graph layers or cluster centroids,
+    allowing sub-linear search complexity across high-dimensional embedding spaces.
+
+
+================================================================================
+7. TESTING PROCEDURES & SESSION PERSISTENCE
+================================================================================
+
+1. DIRECT LOGIN:
+   - Navigate to the Awaken.ai entry screen and proceed to the authentication portal.
+   - Enter any of the mock accounts (e.g., candidate@awaken.ai / candidate123).
+   - The platform will instantly authenticate you, initialize candidate profile data,
+     and populate your personalized War Map, Career Roadmap, and Analytics Vault.
+
+2. ONE-CLICK PORTAL ACCESS:
+   - Clicking "Access Portal" without entering custom email credentials will
+     automatically mount the default candidate profile (candidate@awaken.ai).
+
+3. LOCAL STORAGE KEYS MONITORED:
+   - `awaken-mock-user`: Holds the active session token & user metadata.
+   - `awaken-onboarding-profile`: Contains candidate role, experience, bio, and target metrics.
+   - `awaken-roadmap-progress`: Tracks checklist milestones across the 5 stages.
+   - `awaken-assistant-muted`: Voice feedback toggle state.
+
+4. LOGOUT & STATE RESET:
+   - Clicking "Sign Out" in the workspace sidebar clears all session tokens and
+     safely resets to the login view.
+================================================================================
