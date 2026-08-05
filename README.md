@@ -171,7 +171,6 @@ The ATS algorithm calculates an audit score bounded between `0` and `100` points
 
 ```text
 Final ATS Score = (KeywordScore * 0.40) + (StructureScore * 0.25) + (ImpactScore * 0.20) + (VerbScore * 0.15)
-// Scaled strictly on [0, 100] interval
 ```
 
 Where:
@@ -316,7 +315,7 @@ stateDiagram-v2
 The platform provides complete operational capability in both online and air-gapped / offline configurations:
 
 <p align="center">
-  <img src="assets/storage_topology.svg" alt="Storage Topology" width="780" />
+  <img src="assets/storage_topology.svg" alt="Dual-Engine Storage Topology Architecture" width="780" />
 </p>
 
 ```mermaid
