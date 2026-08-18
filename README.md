@@ -315,7 +315,7 @@ stateDiagram-v2
 The platform provides complete operational capability in both online and air-gapped / offline configurations:
 
 <p align="center">
-  <img src="assets/storage_topology.svg" alt="Dual-Engine Storage Topology Architecture" width="780" />
+  <img src="assets/storage_topology.svg" alt="Storage Topology" width="780" />
 </p>
 
 ```mermaid
@@ -332,7 +332,7 @@ graph TB
     end
 
     subgraph Database_Layer["Storage Targets"]
-        SQLITE[("SQLite Database<br/>server/database.sqlite<br/>WAL Journal Mode")]
+        SQLITE[("SQLite Database<br/>server/database.sqlite<br/>PRAGMA journal_mode=WAL")]
         MYSQL[("Production MySQL<br/>cPanel / Cloud SQL<br/>UTF-8mb4 Charset")]
     end
 
