@@ -427,3 +427,41 @@ CREATE TABLE profiles (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
+
+---
+
+## 8. Hardware & Browser Media Pipeline
+
+The application interacts with browser hardware subsystems following strict permission protocols defined in `metadata.json`:
+
+```mermaid
+graph TD
+    subgraph Browser_Peripherals["Physical Devices"]
+        CAM["Webcam Video Feed"]
+        MIC["Microphone Audio Feed"]
+        SPK["Audio Output Speakers"]
+    end
+
+    subgraph Security_Gate["Browser Security Handshake"]
+        PERM{"User Grants Permission?"}
+    end
+
+    subgraph Audio_Pipeline["Audio Processing Stream"]
+        SR["SpeechRecognition API"]
+        SS["SpeechSynthesisUtterance"]
+        WAV["Visualizer Waveform Canvas"]
+    end
+
+    subgraph Video_Pipeline["Video Processing Stream"]
+        VID["HTMLVideoElement Preview"]
+        MR["MediaRecorder Buffer Blob"]
+    end
+
+    CAM & MIC --> PERM
+    PERM -- Yes --> VID & SR & WAV
+    PERM -- No --> SIM["Simulated Hardware Fallback"]
+    SR --> TXT["Real-time Transcript Buffer"]
+    SS --> SPK
+    VID --> MR
+```
