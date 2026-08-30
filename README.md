@@ -465,3 +465,41 @@ graph TD
     SS --> SPK
     VID --> MR
 ```
+
+
+---
+
+## 9. Quick Start & Execution Modes
+
+### Prerequisites
+- **Node.js**: `v18.0.0` or higher
+- **PHP**: `v8.0.0` or higher with `pdo_sqlite` extension enabled
+- **Groq API Key**: Free tier available from [console.groq.com](https://console.groq.com)
+
+### Execution Matrix
+
+```mermaid
+graph LR
+    A["git clone https://github.com/yashkoparde/Awaken.ai.git"] --> B["Configure .env"]
+    B --> C1["Mode 1: Windows One-Click"]
+    B --> C2["Mode 2: Manual Terminal"]
+    B --> C3["Mode 3: Production Build"]
+
+    C1 --> O1["Double-click start-project.bat"]
+    C2 --> O2["Terminal 1: cd server && php -S 127.0.0.1:8000<br/>Terminal 2: npm run dev"]
+    C3 --> O3["npm run build && vite preview"]
+```
+
+### Environment Variable Specification (`.env`)
+
+```env
+# Primary LLM API configuration (Groq Cloud)
+VITE_GROQ_API_KEY="gsk_your_actual_groq_key_here"
+
+# PHP Backend Gateway endpoint
+VITE_PHP_API_URL="http://127.0.0.1:8000/api"
+
+# Optional: Supabase credentials (fallback authentication)
+VITE_SUPABASE_URL="https://your-project.supabase.co"
+VITE_SUPABASE_ANON_KEY="your-supabase-anon-key"
+```
