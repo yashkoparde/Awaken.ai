@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hero_banner.svg" alt="Awaken.ai Hero Banner" width="800" />
+  <img src="assets/hero_banner.svg" alt="Awaken.ai High-Precision Core Banner" width="800" />
 </p>
 
 <p align="center">
@@ -332,7 +332,7 @@ graph TB
     end
 
     subgraph Database_Layer["Storage Targets"]
-        SQLITE[("SQLite Database<br/>server/database.sqlite<br/>PRAGMA journal_mode=WAL")]
+        SQLITE[("SQLite Database<br/>server/database.sqlite<br/>WAL Journal Mode")]
         MYSQL[("Production MySQL<br/>cPanel / Cloud SQL<br/>UTF-8mb4 Charset")]
     end
 
