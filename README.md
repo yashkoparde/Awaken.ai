@@ -503,3 +503,31 @@ VITE_PHP_API_URL="http://127.0.0.1:8000/api"
 VITE_SUPABASE_URL="https://your-project.supabase.co"
 VITE_SUPABASE_ANON_KEY="your-supabase-anon-key"
 ```
+
+
+---
+
+## 10. Production Deployment Specifications
+
+### Shared Hosting (Apache / cPanel)
+1. Execute `npm run build` to generate the production artifact directory `dist/`.
+2. Deploy the contents of `dist/` into your web server root (`public_html/`).
+3. Deploy the `server/` directory into `public_html/api/`.
+4. Configure database settings in `server/config.php` (set `DB_TYPE` to `mysql` for MySQL installations).
+5. The included `server/.htaccess` file routes all `/api/*` endpoints through `server/index.php`.
+
+### Static Edge Deployment (Netlify / Vercel)
+- **Netlify**: Configuration managed via `netlify.toml` with single-page application redirect rules:
+  ```toml
+  [[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+  ```
+- **Vercel**: Configuration managed via `vercel.json` routing all routes to index.
+
+---
+
+<p align="center">
+  <sub>Architected and engineered by <a href="https://github.com/yashkoparde">yashkoparde</a>. Built for technical candidates navigating high-stakes interview processes.</sub>
+</p>
