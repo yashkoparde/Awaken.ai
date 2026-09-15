@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hero_banner.svg" alt="Awaken.ai High-Precision Core Banner" width="800" />
+  <img src="assets/hero_banner.svg" alt="Awaken.ai Hero Banner" width="800" />
 </p>
 
 <p align="center">
@@ -44,7 +44,7 @@ graph TB
     end
 
     subgraph Inference_Mesh["LLM Inference Mesh (Groq High-Speed Fabric)"]
-        M1["Primary: openai/gpt-oss-120b"]
+        M1["Primary LLM Node: openai/gpt-oss-120b"]
         M2["Fast: openai/gpt-oss-20b"]
         M3["Fallback 1: llama-3.3-70b-versatile"]
         M4["Fallback 2: llama-3.1-8b-instant"]
