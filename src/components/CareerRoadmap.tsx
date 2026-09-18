@@ -12,7 +12,10 @@ import {
   Milestone,
   Target,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Calendar,
+  Clock,
+  Check
 } from 'lucide-react';
 
 interface MilestoneItem {
@@ -37,7 +40,7 @@ export default function CareerRoadmap() {
   });
 
   const [activeMilestoneId, setActiveMilestoneId] = useState<number>(1);
-  const [roadmapMode, setRoadmapMode] = useState<'week-wise' | 'day-wise'>('week-wise');
+  const [roadmapMode, setRoadmapMode] = useState<'week-wise' | 'day-wise' | 'calendar'>('week-wise');
 
   const [taskProgress, setTaskProgress] = useState<Record<string, boolean>>(() => {
     try {
@@ -284,6 +287,15 @@ export default function CareerRoadmap() {
             >
               Day-Wise (30 Days)
             </button>
+            <button
+              onClick={() => { setRoadmapMode('calendar'); }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${
+                roadmapMode === 'calendar' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              <span>Calendar View</span>
+            </button>
           </div>
 
           <div className="flex items-center gap-4 pl-2 border-l border-white/5">
@@ -313,8 +325,107 @@ export default function CareerRoadmap() {
       </div>
       </div>
 
-      {/* Timeline Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Calendar View Mode */}
+      {roadmapMode === 'calendar' ? (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between bg-slate-900/60 border border-white/5 p-4 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+                <Calendar className="w-5 h-5 text-blue-400" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider">30-Day Placement Preparation Calendar</h3>
+                <p className="text-xs text-slate-400">Scheduled progression based on target role: <span className="text-blue-400 font-semibold">{profile?.role || "Software Engineer"}</span></p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-xs">
+              <span className="flex items-center gap-1.5 text-slate-400">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Done
+              </span>
+              <span className="flex items-center gap-1.5 text-slate-400">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> Active Sprint
+              </span>
+              <span className="flex items-center gap-1.5 text-slate-400">
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block"></span> Upcoming
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {[
+              { day: 1, title: 'Resume Audit & ATS Baseline', sprint: 'Sprint 1: Skill Gaps', taskId: 'd1', desc: 'Scan against 5 target JDs' },
+              { day: 2, title: 'ATS Keyword Optimization', sprint: 'Sprint 1: Skill Gaps', taskId: 'd1', desc: 'Extract high-yield keywords' },
+              { day: 3, title: 'Programming Syntax Review', sprint: 'Sprint 1: Skill Gaps', taskId: 'd2', desc: 'TypeScript, SQL & Python' },
+              { day: 4, title: 'Priority Gap Drills', sprint: 'Sprint 1: Skill Gaps', taskId: 'd2', desc: 'Close technical deficiencies' },
+              { day: 5, title: 'Project Scaffold Setup', sprint: 'Sprint 1: Skill Gaps', taskId: 'd3', desc: 'Init repo & modular architecture' },
+              { day: 6, title: 'Project Core Delivery', sprint: 'Sprint 1: Skill Gaps', taskId: 'd3', desc: 'Implement business logic' },
+              { day: 7, title: 'Sprint 1 Retrospective', sprint: 'Sprint 1: Skill Gaps', taskId: 'd3', desc: 'Deploy & commit portfolio work' },
+              { day: 8, title: 'Quant Aptitude - Math', sprint: 'Sprint 2: Aptitude', taskId: 'd4', desc: 'Percentages, P&L, Time & Work' },
+              { day: 9, title: 'Quant Aptitude - Timed', sprint: 'Sprint 2: Aptitude', taskId: 'd4', desc: 'Written test module drills' },
+              { day: 10, title: 'Logical Reasoning Puzzles', sprint: 'Sprint 2: Aptitude', taskId: 'd5', desc: 'Deductive reasoning & syllogisms' },
+              { day: 11, title: 'Pattern Recognition Drills', sprint: 'Sprint 2: Aptitude', taskId: 'd5', desc: 'Matrices & series completion' },
+              { day: 12, title: 'Verbal Ability Grammar', sprint: 'Sprint 2: Aptitude', taskId: 'd6', desc: 'Sentence correction & vocab' },
+              { day: 13, title: 'Reading Comprehension', sprint: 'Sprint 2: Aptitude', taskId: 'd6', desc: 'Speed reading & inference' },
+              { day: 14, title: 'Full Aptitude Diagnostic', sprint: 'Sprint 2: Aptitude', taskId: 'd6', desc: 'Timed mock benchmark' },
+              { day: 15, title: 'Data Structures - Arrays/Trees', sprint: 'Sprint 3: Tech Depth', taskId: 'd7', desc: 'LeetCode Medium problem set' },
+              { day: 16, title: 'Dynamic Programming & Graphs', sprint: 'Sprint 3: Tech Depth', taskId: 'd7', desc: 'BFS/DFS & memoization' },
+              { day: 17, title: 'Algorithms Speed Test', sprint: 'Sprint 3: Tech Depth', taskId: 'd7', desc: 'Timed execution simulation' },
+              { day: 18, title: 'Database Indexing & Normalization', sprint: 'Sprint 3: Tech Depth', taskId: 'd8', desc: 'SQL optimization & execution plans' },
+              { day: 19, title: 'System Design Fundamentals', sprint: 'Sprint 3: Tech Depth', taskId: 'd8', desc: 'Caching, Load Balancers, Sharding' },
+              { day: 20, title: 'Microservices & API Contracts', sprint: 'Sprint 3: Tech Depth', taskId: 'd9', desc: 'gRPC vs REST vs GraphQL' },
+              { day: 21, title: 'Technical Q&A Drilling', sprint: 'Sprint 3: Tech Depth', taskId: 'd9', desc: 'AI interactive review' },
+              { day: 22, title: 'AI Mock Interview - Tech Rd 1', sprint: 'Sprint 4: Simulation', taskId: 'd10', desc: 'Coding & architecture probe' },
+              { day: 23, title: 'AI Mock Interview - Tech Rd 2', sprint: 'Sprint 4: Simulation', taskId: 'd10', desc: 'Adversarial systems questions' },
+              { day: 24, title: 'HR & Culture Mock Round', sprint: 'Sprint 4: Simulation', taskId: 'd10', desc: 'Leadership & STAR responses' },
+              { day: 25, title: 'Voice & Poise Telemetry Audit', sprint: 'Sprint 4: Simulation', taskId: 'd11', desc: 'Speech cadence & eye contact' },
+              { day: 26, title: 'Body Language Refinement', sprint: 'Sprint 4: Simulation', taskId: 'd11', desc: 'Postural stability practice' },
+              { day: 27, title: '6-Dimension Scorecard Analysis', sprint: 'Sprint 4: Simulation', taskId: 'd11', desc: 'Review weak metrics' },
+              { day: 28, title: 'Final ATS Resume Export', sprint: 'Sprint 4: Simulation', taskId: 'd12', desc: 'Format verified PDF' },
+              { day: 29, title: 'Job Application Blitz', sprint: 'Sprint 4: Simulation', taskId: 'd12', desc: 'Apply to 10 curated postings' },
+              { day: 30, title: 'Offer Readiness & Salary Strategy', sprint: 'Sprint 4: Simulation', taskId: 'd12', desc: 'Placement readiness unlocked' },
+            ].map((d) => {
+              const isDone = !!taskProgress[d.taskId];
+              const isCurrent = d.day >= 8 && d.day <= 14;
+              return (
+                <div
+                  key={d.day}
+                  onClick={() => toggleTask(1, d.taskId)}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between min-h-[140px] group ${
+                    isDone
+                      ? 'bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500/50'
+                      : isCurrent
+                      ? 'bg-blue-950/30 border-blue-500/40 hover:border-blue-500/60 shadow-lg shadow-blue-500/5'
+                      : 'bg-slate-900/50 border-white/5 hover:border-white/10'
+                  }`}
+                >
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md ${
+                        isDone ? 'bg-emerald-500/20 text-emerald-400' : isCurrent ? 'bg-blue-500/20 text-blue-400' : 'bg-white/5 text-slate-500'
+                      }`}>
+                        Day {d.day}
+                      </span>
+                      {isDone ? (
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      ) : (
+                        <Circle className="w-4 h-4 text-slate-600 group-hover:text-blue-400 transition-colors" />
+                      )}
+                    </div>
+                    <h4 className="text-xs font-bold text-white leading-snug">{d.title}</h4>
+                    <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">{d.desc}</p>
+                  </div>
+                  <div className="pt-2 mt-2 border-t border-white/5 flex items-center justify-between text-[9px] text-slate-500 font-mono">
+                    <span>{d.sprint.split(':')[0]}</span>
+                    <span className={isDone ? 'text-emerald-400 font-bold' : ''}>{isDone ? 'Completed' : 'Click to complete'}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        /* Timeline Layout */
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Vertical Timeline Track (milestones selector) */}
         <div className="lg:col-span-5 space-y-4">
           <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-4">Milestone Pipeline</p>
@@ -483,6 +594,7 @@ export default function CareerRoadmap() {
           </AnimatePresence>
         </div>
       </div>
+      )}
     </div>
   );
 }
