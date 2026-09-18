@@ -79,6 +79,21 @@ if ($route === 'admin' || $route === 'dashboard' || $route === 'api/admin' || em
           </a>
         </div>
 
+        <!-- Demo Account Banner for Judges & Evaluators -->
+        <div class="p-6 bg-gradient-to-r from-blue-950/80 via-slate-900 to-indigo-950/80 border border-blue-500/30 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-blue-500 text-[10px] font-bold uppercase tracking-wider text-white">Pre-Configured Demo Account</span>
+              <span class="text-xs text-slate-400 font-mono">Real Assessment & ATS Data Attached</span>
+            </div>
+            <p class="text-sm font-semibold text-white">Alex Chen (<span class="text-blue-400">Full Stack Software Engineer</span>)</p>
+            <p class="text-xs text-slate-300 font-mono">Email: <span class="text-emerald-400 font-bold">demo@awaken.ai</span> &nbsp;|&nbsp; Password: <span class="text-emerald-400 font-bold">AwakenDemo2026!</span></p>
+          </div>
+          <a href="<?= htmlspecialchars($frontendUrl) ?>" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md">
+            Sign In with Demo
+          </a>
+        </div>
+
         <!-- Metric Counter Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="p-6 bg-slate-900 border border-white/5 rounded-2xl">
