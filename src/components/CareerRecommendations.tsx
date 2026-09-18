@@ -13,9 +13,11 @@ import {
   FileText,
   Building,
   Target,
-  Search
+  Search,
+  MapPin
 } from 'lucide-react';
 import { groqChatCompletion } from '../lib/groq';
+import JobLocationMap, { LocalJobOpening } from './JobLocationMap';
 
 interface RoleRecommendation {
   roleTitle: string;
@@ -84,9 +86,57 @@ export default function CareerRecommendations() {
   const [skillsInput, setSkillsInput] = useState(
     profile?.role ? `${profile.role}, ${profile.domain}, ${profile.experience}, React, TypeScript, Python, SQL` : "TypeScript, React, Node.js, SQL, Problem Solving, Data Structures"
   );
+  const [selectedCity, setSelectedCity] = useState<string>('Bangalore');
   const [isGenerating, setIsGenerating] = useState(false);
   const [recommendations, setRecommendations] = useState<RoleRecommendation[]>(DEFAULT_RECOMMENDATIONS);
   const [selectedRole, setSelectedRole] = useState<RoleRecommendation>(DEFAULT_RECOMMENDATIONS[0]);
+
+  const CITIES_DATA: Record<string, { coords: [number, number]; openings: (role: string) => LocalJobOpening[] }> = {
+    'Bangalore': {
+      coords: [12.9716, 77.5946],
+      openings: (role: string) => [
+        { id: 'blr-1', title: `Lead ${role}`, company: 'Infosys Innovation Lab', location: 'Electronic City Phase 1', salary: '₹18 - ₹28 LPA', lat: 12.8452, lng: 77.6602, type: 'Full-time', distance: '4.2 km' },
+        { id: 'blr-2', title: `Senior ${role}`, company: 'Flipkart Tech Hub', location: 'Bellandur / Outer Ring Rd', salary: '₹24 - ₹36 LPA', lat: 12.9260, lng: 77.6762, type: 'Hybrid', distance: '6.8 km' },
+        { id: 'blr-3', title: `${role} - Platform Architecture`, company: 'Razorpay Systems', location: 'Koramangala 4th Block', salary: '₹22 - ₹32 LPA', lat: 12.9352, lng: 77.6245, type: 'Full-time', distance: '3.1 km' },
+        { id: 'blr-4', title: `Associate ${role}`, company: 'Swiggy HQ', location: 'Marathahalli Tech Corridor', salary: '₹14 - ₹20 LPA', lat: 12.9591, lng: 77.6974, type: 'Hybrid', distance: '8.5 km' },
+      ]
+    },
+    'Mumbai': {
+      coords: [19.0760, 72.8777],
+      openings: (role: string) => [
+        { id: 'mum-1', title: `Senior ${role}`, company: 'Tata Consultancy Systems', location: 'BKC Financial Center', salary: '₹20 - ₹30 LPA', lat: 19.0657, lng: 72.8683, type: 'Full-time', distance: '2.5 km' },
+        { id: 'mum-2', title: `${role} - Cloud Fintech`, company: 'Jio Platforms Innovation', location: 'Navi Mumbai Hub', salary: '₹18 - ₹26 LPA', lat: 19.1484, lng: 73.0089, type: 'Hybrid', distance: '12 km' },
+        { id: 'mum-3', title: `Principal ${role}`, company: 'Morgan Stanley Tech', location: 'Powai Business Park', salary: '₹28 - ₹42 LPA', lat: 19.1176, lng: 72.9060, type: 'Full-time', distance: '7.4 km' },
+      ]
+    },
+    'Hyderabad': {
+      coords: [17.3850, 78.4867],
+      openings: (role: string) => [
+        { id: 'hyd-1', title: `Enterprise ${role}`, company: 'Microsoft India R&D', location: 'Gachibowli Tech Campus', salary: '₹26 - ₹38 LPA', lat: 17.4401, lng: 78.3489, type: 'Hybrid', distance: '5.2 km' },
+        { id: 'hyd-2', title: `${role} - Core Services`, company: 'Amazon Development Centre', location: 'HITEC City Phase 2', salary: '₹22 - ₹34 LPA', lat: 17.4474, lng: 78.3762, type: 'Full-time', distance: '4.1 km' },
+        { id: 'hyd-3', title: `Staff ${role}`, company: 'ServiceNow Hub', location: 'Financial District, Nanakramguda', salary: '₹25 - ₹35 LPA', lat: 17.4156, lng: 78.3427, type: 'Full-time', distance: '6.0 km' },
+      ]
+    },
+    'Pune': {
+      coords: [18.5204, 73.8567],
+      openings: (role: string) => [
+        { id: 'pune-1', title: `Lead ${role}`, company: 'Barclays Global Service', location: 'Hinjawadi Phase 1', salary: '₹18 - ₹27 LPA', lat: 18.5912, lng: 73.7389, type: 'Hybrid', distance: '14 km' },
+        { id: 'pune-2', title: `${role} - Backend Systems`, company: 'Persistent Systems', location: 'Senapati Bapat Road', salary: '₹14 - ₹22 LPA', lat: 18.5314, lng: 73.8298, type: 'Full-time', distance: '3.8 km' },
+        { id: 'pune-3', title: `Senior ${role}`, company: 'Tech Mahindra Innovations', location: 'Magarpatta Cybercity', salary: '₹16 - ₹25 LPA', lat: 18.5158, lng: 73.9272, type: 'Full-time', distance: '8.1 km' },
+      ]
+    },
+    'Delhi NCR': {
+      coords: [28.6139, 77.2090],
+      openings: (role: string) => [
+        { id: 'del-1', title: `Senior ${role}`, company: 'Google India', location: 'Cyber City, Gurugram', salary: '₹30 - ₹48 LPA', lat: 28.4952, lng: 77.0891, type: 'Hybrid', distance: '16 km' },
+        { id: 'del-2', title: `Lead ${role}`, company: 'Zomato Tech Headquarters', location: 'Golf Course Road, Gurugram', salary: '₹22 - ₹35 LPA', lat: 28.4595, lng: 77.0945, type: 'Full-time', distance: '18 km' },
+        { id: 'del-3', title: `${role} - Enterprise Cloud`, company: 'Paytm Payments Hub', location: 'Sector 62, Noida', salary: '₹16 - ₹24 LPA', lat: 28.6280, lng: 77.3649, type: 'Full-time', distance: '15 km' },
+      ]
+    }
+  };
+
+  const activeCityData = CITIES_DATA[selectedCity] || CITIES_DATA['Bangalore'];
+  const localJobs = activeCityData.openings(selectedRole.roleTitle);
 
   const generateRecommendations = async () => {
     if (!skillsInput.trim()) return;
@@ -298,6 +348,43 @@ ${skillsInput}`;
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Interactive Leaflet City Map Radar */}
+            <div className="space-y-4 pt-4 border-t border-white/5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-emerald-400" />
+                  <span className="text-xs uppercase font-black tracking-wider text-white">
+                    Live Job Radar & City Map
+                  </span>
+                </div>
+                
+                {/* City Picker */}
+                <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-white/10">
+                  {['Bangalore', 'Mumbai', 'Hyderabad', 'Pune', 'Delhi NCR'].map((city) => (
+                    <button
+                      key={city}
+                      onClick={() => setSelectedCity(city)}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase transition-all ${
+                        selectedCity === city
+                          ? 'bg-blue-600 text-white shadow'
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      {city}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Map View Container */}
+              <JobLocationMap
+                city={selectedCity}
+                roleTitle={selectedRole.roleTitle}
+                jobs={localJobs}
+                centerCoords={activeCityData.coords}
+              />
             </div>
 
             {/* Sample Positions to Apply */}
