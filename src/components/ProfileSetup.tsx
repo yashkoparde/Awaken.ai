@@ -68,6 +68,7 @@ export default function ProfileSetup({ onComplete }: { onComplete: () => void })
     try {
       localStorage.setItem(profileStorageKey, JSON.stringify(formData));
       localStorage.setItem('awaken-onboarding-profile', JSON.stringify(formData));
+      sessionStorage.removeItem('awaken-plan-notif-seen');
       await api.saveProfile(formData);
 
       if (auth.currentUser) {

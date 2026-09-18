@@ -191,15 +191,13 @@ export default function AnalyticsVault({ viewMode = 'all' }: { viewMode?: 'all' 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/5 pb-8">
         <div className="space-y-2">
           <p className="text-[10px] text-blue-500 font-bold uppercase tracking-[0.3em]">
-            {viewMode === 'readiness' ? 'Module 12: Placement Readiness Score' : 'Module 11: Progress Dashboard'}
+            Module 11: Candidate Progress & Activity Dashboard
           </p>
           <h2 className="text-4xl font-extrabold tracking-tight text-white animate-fade-in">
-            {viewMode === 'readiness' ? 'Placement Readiness Scorecard' : 'Comprehensive Progress Dashboard'}
+            Continuous Progress & Evaluation History
           </h2>
           <p className="text-slate-400 text-sm font-medium">
-            {viewMode === 'readiness' 
-              ? 'Multi-dimensional readiness index assessing ATS alignment, technical competency, mock interview scores, and non-verbal poise.'
-              : 'Quantifying your professional evolution, completed milestone trajectories, and assessment score telemetry.'}
+            Chronological performance history, completed assessment telemetry, diagnostic growth curves, and skill vector analysis.
           </p>
         </div>
         <div className="flex gap-3">

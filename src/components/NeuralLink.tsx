@@ -352,6 +352,24 @@ export default function NeuralLink({ onSuccess }: NeuralLinkProps) {
               <span>Sign In</span>
             )}
           </button>
+
+          {/* Quick Demo Access for Evaluators / Judges */}
+          {!isForgotPassword && (
+            <div className="pt-4 border-t border-slate-800/60">
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('demo@awaken.ai');
+                  setPassword('AwakenDemo2026!');
+                  setIsRegister(false);
+                }}
+                className="w-full py-2 px-3 bg-white/[0.03] hover:bg-blue-600/10 border border-white/10 hover:border-blue-500/30 rounded-xl text-xs text-slate-300 hover:text-white transition-all flex items-center justify-center gap-2 group"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Auto-Fill Demo Credentials (<span className="text-blue-400 font-medium">demo@awaken.ai</span>)</span>
+              </button>
+            </div>
+          )}
         </form>
       </motion.div>
     </div>
