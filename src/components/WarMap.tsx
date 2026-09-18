@@ -11,6 +11,8 @@ import ResourceFinder from './ResourceFinder';
 import CareerRoadmap from './CareerRoadmap';
 import ResumeMatchingEngine from './ResumeMatchingEngine';
 import CareerRecommendations from './CareerRecommendations';
+import JDAnalyzer from './JDAnalyzer';
+import PlacementReadinessScore from './PlacementReadinessScore';
 import { 
   Terminal, 
   Code2,
@@ -38,7 +40,10 @@ import {
   HelpCircle,
   FileText,
   GitCompare,
-  Target
+  Target,
+  Bell,
+  CheckCircle2,
+  X
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { api } from '../lib/api';
@@ -72,12 +77,29 @@ export default function WarMap({ user }: { user: UserProfile }) {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [performanceHistory, setPerformanceHistory] = useState<number[]>([45, 52, 48, 62, 58, 73, 67, 81, 76, 88]);
 
+  const [showPlanNotification, setShowPlanNotification] = useState<boolean>(() => {
+    // If user has an onboarding profile saved and hasn't dismissed plan toast, show notification
+    try {
+      const p = localStorage.getItem('awaken-onboarding-profile');
+      const seen = sessionStorage.getItem('awaken-plan-notif-seen');
+      return !!p && !seen;
+    } catch {
+      return false;
+    }
+  });
+
   React.useEffect(() => {
     const timer = setInterval(() => {
       setElapsedSeconds((prev) => prev + 1);
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  React.useEffect(() => {
+    if (showPlanNotification) {
+      sessionStorage.setItem('awaken-plan-notif-seen', 'true');
+    }
+  }, [showPlanNotification]);
 
   React.useEffect(() => {
     const perfInterval = setInterval(() => {
@@ -174,19 +196,16 @@ export default function WarMap({ user }: { user: UserProfile }) {
               {activeModule === item.id && (
                 <motion.div layoutId="highlight" className="absolute inset-x-0 bottom-0 h-0.5 bg-white/40" />
               )}
-              <item.icon className={`w-4 h-4 transition-colors ${activeModule === item.id ? 'text-white' : 'text-slate-500 group-hover:text-slate-300'}`} />
-              <div className="flex-1 text-left">
-                <p className={`text-[11px] font-bold uppercase tracking-wider ${activeModule === item.id ? 'text-white' : ''}`}>
+              <item.icon className={`w-4 h-4 shrink-0 transition-colors ${activeModule === item.id ? 'text-white' : 'text-slate-500 group-hover:text-slate-300'}`} />
+              <div className="flex-1 text-left min-w-0">
+                <p className={`text-[11px] font-bold tracking-wide truncate ${activeModule === item.id ? 'text-white' : ''}`}>
                   {item.label}
                 </p>
-                <p className={`text-[9px] font-medium ${activeModule === item.id ? 'text-blue-100/60' : 'text-slate-500'}`}>{item.desc}</p>
               </div>
-              <ChevronRight className={`w-3 h-3 transition-all duration-300 ${activeModule === item.id ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'}`} />
+              <ChevronRight className={`w-3.5 h-3.5 shrink-0 transition-all duration-300 ${activeModule === item.id ? 'translate-x-0 opacity-100 text-white' : '-translate-x-1 opacity-0 text-slate-500'}`} />
             </button>
           ))}
         </nav>
-
-        {/* Leftmost neural sync log panel removed. Code logs on right are active. */}
 
         {/* User Profile & Footer Actions */}
         <div className="p-4 border-t border-white/5 space-y-2 bg-slate-900/50">
@@ -217,18 +236,19 @@ export default function WarMap({ user }: { user: UserProfile }) {
       {/* Main Workspace */}
       <main className="flex-1 relative flex flex-col z-10 bg-slate-950">
         {/* Top Control Bar */}
-        <header className="h-24 border-b border-white/5 flex items-center justify-between px-10 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-20">
+        <header className="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-20">
           <div className="flex items-center gap-4">
-            <span className="text-xs font-bold text-slate-400 tracking-wide">
+            <span className="text-xs font-bold text-slate-300 tracking-wide flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Placement Preparation & Career Acceleration Platform
             </span>
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="hidden lg:flex items-center gap-10 pr-8 border-r border-white/5">
+            <div className="hidden lg:flex items-center gap-8 pr-6 border-r border-white/5">
                {/* Interval Timer */}
                <div className="flex flex-col items-end">
-                  <span className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Session Timer</span>
+                  <span className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Session Active</span>
                   <div className="flex items-center gap-2 text-blue-400 font-mono font-bold text-xs">
                     <Clock className="w-3.5 h-3.5" />
                     <span>{formatTimer(elapsedSeconds)}</span>
@@ -236,26 +256,68 @@ export default function WarMap({ user }: { user: UserProfile }) {
                </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <button 
                 onClick={() => setShowLogs(!showLogs)}
-                className={`h-11 px-6 rounded-2xl border transition-all text-[10px] font-black uppercase tracking-widest flex items-center gap-3 ${
-                  showLogs ? 'bg-blue-600 border-blue-500 text-white' : 'border-white/10 bg-white/[0.02] text-slate-400 hover:bg-white/[0.05]'
+                className={`h-10 px-4 rounded-xl border transition-all text-[10px] font-black uppercase tracking-widest flex items-center gap-2.5 ${
+                  showLogs ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/20' : 'border-white/10 bg-white/[0.02] text-slate-400 hover:bg-white/[0.05]'
                 }`}
               >
+                 <Activity className="w-3.5 h-3.5 text-blue-400" />
                  {showLogs ? 'Hide Node Logs' : 'View Core Logs'}
               </button>
-              <div className="h-11 w-11 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-center">
-                 <Activity className="w-4 h-4 text-blue-400" />
-              </div>
             </div>
           </div>
         </header>
 
+        {/* Plan Generated Global Banner Toast */}
+        <AnimatePresence>
+          {showPlanNotification && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mx-8 mt-4 p-4 rounded-2xl bg-gradient-to-r from-blue-900/60 via-indigo-900/40 to-slate-900 border border-blue-500/40 flex items-center justify-between shadow-2xl backdrop-blur-xl"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="w-5 h-5 text-blue-400" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Personalized Preparation Plan Generated</h4>
+                    <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 uppercase">Automated</span>
+                  </div>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    Your day-wise and week-wise milestones have been synthesized from your onboarding parameters. Ready to explore in Module 5!
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    setActiveModule('prep-plan');
+                    setShowPlanNotification(false);
+                  }}
+                  className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md"
+                >
+                  View Plan
+                </button>
+                <button
+                  onClick={() => setShowPlanNotification(false)}
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Content Area */}
         <section className="flex-1 relative overflow-hidden flex">
           <div className="flex-1 relative overflow-hidden">
-            <div className="absolute inset-0 p-10 overflow-y-auto scrollbar-hide">
+            <div className="absolute inset-0 p-8 overflow-y-auto scrollbar-hide">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeModule}
@@ -266,7 +328,7 @@ export default function WarMap({ user }: { user: UserProfile }) {
                   className="h-full"
                 >
                   {activeModule === 'resume-analyzer' && <ResumeBuilder focusMode="resume" />}
-                  {activeModule === 'jd-analyzer' && <ResumeBuilder focusMode="job" />}
+                  {activeModule === 'jd-analyzer' && <JDAnalyzer />}
                   {activeModule === 'job-match' && <ResumeMatchingEngine defaultTab="overview" />}
                   {activeModule === 'skill-gap' && <ResumeMatchingEngine defaultTab="gaps" />}
                   {activeModule === 'prep-plan' && <CareerRoadmap />}
@@ -276,7 +338,7 @@ export default function WarMap({ user }: { user: UserProfile }) {
                   {activeModule === 'aptitude-prep' && <WrittenTest defaultCategory="quant" />}
                   {activeModule === 'career-recommend' && <CareerRecommendations />}
                   {activeModule === 'progress-dashboard' && <AnalyticsVault viewMode="dashboard" />}
-                  {activeModule === 'readiness-score' && <AnalyticsVault viewMode="readiness" />}
+                  {activeModule === 'readiness-score' && <PlacementReadinessScore />}
                 </motion.div>
               </AnimatePresence>
             </div>
