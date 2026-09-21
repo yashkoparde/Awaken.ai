@@ -1,32 +1,79 @@
-<svg width="780" height="230" viewBox="0 0 780 230" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="780" height="230" rx="12" fill="#0B0F19" stroke="#1E293B"/>
-  <rect x="25" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/>
-  <rect x="40" y="45" width="24" height="24" rx="6" fill="#0369A1"/>
-  <text x="40" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Orchestrator</text>
-  <text x="40" y="108" fill="#38BDF8" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">STATE HARMONY</text>
-  <text x="40" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Manages session cross-sync, module telemetry, and context persistence.</text>
+<svg width="780" height="240" viewBox="0 0 780 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="780" height="240" rx="12" fill="#0B0F19" stroke="#1E293B"/>
 
-  <rect x="175" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#6366F1" stroke-width="1.5"/>
-  <rect x="190" y="45" width="24" height="24" rx="6" fill="#4338CA"/>
-  <text x="190" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Auditor</text>
-  <text x="190" y="108" fill="#818CF8" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">ATS SCANNER</text>
-  <text x="190" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Forensically parses structure, action verbs, and skill density gap.</text>
+  <!-- Orchestrator Card -->
+  <g transform="translate(25, 25)">
+    <rect width="136" height="190" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/>
+    <rect x="14" y="16" width="28" height="28" rx="6" fill="#0369A1" fill-opacity="0.25" stroke="#38BDF8" stroke-width="1"/>
+    <path d="M 23 30 L 28 35 L 35 25" stroke="#38BDF8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="14" y="66" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Orchestrator</text>
+    <text x="14" y="82" fill="#38BDF8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="0.06em">STATE HARMONY</text>
+    <text x="14" y="104" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" line-height="1.4">
+      <tspan x="14" dy="0">Coordinates cross-</tspan>
+      <tspan x="14" dy="14">session state, telemetry</tspan>
+      <tspan x="14" dy="14">pipelines, and live</tspan>
+      <tspan x="14" dy="14">context persistence.</tspan>
+    </text>
+  </g>
 
-  <rect x="325" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
-  <rect x="340" y="45" width="24" height="24" rx="6" fill="#047857"/>
-  <text x="340" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Architect</text>
-  <text x="340" y="108" fill="#34D399" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">VOICE BUILDER</text>
-  <text x="340" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Converts spoken narrative and oral answers into high-density ATS resumes.</text>
+  <!-- Auditor Card -->
+  <g transform="translate(176, 25)">
+    <rect width="136" height="190" rx="10" fill="#0F172A" stroke="#6366F1" stroke-width="1.5"/>
+    <rect x="14" y="16" width="28" height="28" rx="6" fill="#4338CA" fill-opacity="0.25" stroke="#6366F1" stroke-width="1"/>
+    <circle cx="28" cy="30" r="6" stroke="#818CF8" stroke-width="1.75" fill="none"/>
+    <line x1="33" y1="35" x2="37" y2="39" stroke="#818CF8" stroke-width="1.75" stroke-linecap="round"/>
+    <text x="14" y="66" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Auditor</text>
+    <text x="14" y="82" fill="#818CF8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="0.06em">ATS SCANNER</text>
+    <text x="14" y="104" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5">
+      <tspan x="14" dy="0">Evaluates schema</tspan>
+      <tspan x="14" dy="14">integrity, keyword gap</tspan>
+      <tspan x="14" dy="14">frequency, and action</tspan>
+      <tspan x="14" dy="14">verb distributions.</tspan>
+    </text>
+  </g>
 
-  <rect x="475" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#F43F5E" stroke-width="1.5"/>
-  <rect x="490" y="45" width="24" height="24" rx="6" fill="#BE123C"/>
-  <text x="490" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Adversary</text>
-  <text x="490" y="108" fill="#FB7185" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">INTERVIEW SIM</text>
-  <text x="490" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Executes rigorous technical probing, dynamic pressure tests, and follow-ups.</text>
+  <!-- Architect Card -->
+  <g transform="translate(327, 25)">
+    <rect width="136" height="190" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="14" y="16" width="28" height="28" rx="6" fill="#047857" fill-opacity="0.25" stroke="#10B981" stroke-width="1"/>
+    <rect x="22" y="24" width="12" height="12" rx="2" stroke="#34D399" stroke-width="1.75" fill="none"/>
+    <text x="14" y="66" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Architect</text>
+    <text x="14" y="82" fill="#34D399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="0.06em">VOICE BUILDER</text>
+    <text x="14" y="104" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5">
+      <tspan x="14" dy="0">Synthesizes verbal</tspan>
+      <tspan x="14" dy="14">narratives and interview</tspan>
+      <tspan x="14" dy="14">responses into ATS-</tspan>
+      <tspan x="14" dy="14">tailored profiles.</tspan>
+    </text>
+  </g>
 
-  <rect x="625" y="30" width="130" height="170" rx="10" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/>
-  <rect x="640" y="45" width="24" height="24" rx="6" fill="#B45309"/>
-  <text x="640" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Coach</text>
-  <text x="640" y="108" fill="#FBBF24" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">SPEECH ANALYTICS</text>
-  <text x="640" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Monitors answer conciseness, verbal filler rate, and vocal confidence signals.</text>
+  <!-- Adversary Card -->
+  <g transform="translate(478, 25)">
+    <rect width="136" height="190" rx="10" fill="#0F172A" stroke="#F43F5E" stroke-width="1.5"/>
+    <rect x="14" y="16" width="28" height="28" rx="6" fill="#BE123C" fill-opacity="0.25" stroke="#F43F5E" stroke-width="1"/>
+    <polygon points="28,23 35,35 21,35" stroke="#FB7185" stroke-width="1.5" fill="none"/>
+    <text x="14" y="66" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Adversary</text>
+    <text x="14" y="82" fill="#FB7185" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="0.06em">INTERVIEW SIM</text>
+    <text x="14" y="104" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5">
+      <tspan x="14" dy="0">Runs adaptive drill-</tspan>
+      <tspan x="14" dy="14">downs, dynamic deep</tspan>
+      <tspan x="14" dy="14">probes, and technical</tspan>
+      <tspan x="14" dy="14">challenge scenarios.</tspan>
+    </text>
+  </g>
+
+  <!-- Coach Card -->
+  <g transform="translate(629, 25)">
+    <rect width="126" height="190" rx="10" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="14" y="16" width="28" height="28" rx="6" fill="#B45309" fill-opacity="0.25" stroke="#F59E0B" stroke-width="1"/>
+    <path d="M 23 25 L 33 25 M 23 29 L 31 29 M 23 33 L 28 33" stroke="#FBBF24" stroke-width="1.75" stroke-linecap="round"/>
+    <text x="14" y="66" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Coach</text>
+    <text x="14" y="82" fill="#FBBF24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="0.06em">SPEECH ANALYTICS</text>
+    <text x="14" y="104" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5">
+      <tspan x="14" dy="0">Calculates delivery</tspan>
+      <tspan x="14" dy="14">pacing, vocal filler</tspan>
+      <tspan x="14" dy="14">density, and answer</tspan>
+      <tspan x="14" dy="14">structure metrics.</tspan>
+    </text>
+  </g>
 </svg>
