@@ -2,6 +2,10 @@
   <svg width="800" height="180" viewBox="0 0 800 180" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="800" height="180" rx="16" fill="#090D16"/>
     <defs>
+      <linearGradient id="grid-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1E293B" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#0F172A" stop-opacity="0.2"/>
+      </linearGradient>
       <linearGradient id="neon-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#38BDF8"/>
         <stop offset="50%" stop-color="#6366F1"/>
@@ -14,9 +18,9 @@
     <rect width="800" height="180" rx="16" fill="url(#dot-pattern)"/>
     <path d="M 0 90 Q 200 40 400 90 T 800 90" stroke="url(#neon-cyan)" stroke-width="1.5" stroke-opacity="0.3" fill="none"/>
     <rect x="40" y="32" width="110" height="26" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-    <text x="52" y="49" fill="#38BDF8" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="0.1em">SYSTEM CORE</text>
-    <text x="40" y="105" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="44" font-weight="900" letter-spacing="-0.03em">AWAKEN.AI</text>
-    <text x="40" y="136" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="14" font-weight="500">Autonomous Interview Intelligence & High-Stakes Career Simulation Infrastructure</text>
+    <text x="52" y="49" fill="#38BDF8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" letter-spacing="0.1em">SYSTEM CORE</text>
+    <text x="40" y="105" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="900" letter-spacing="-0.03em">AWAKEN.AI</text>
+    <text x="40" y="136" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500">Autonomous Interview Intelligence & High-Stakes Career Simulation Infrastructure</text>
     <circle cx="730" cy="90" r="42" stroke="#1E293B" stroke-width="2" fill="#0B132B"/>
     <circle cx="730" cy="90" r="28" stroke="#38BDF8" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
     <circle cx="730" cy="90" r="8" fill="#6366F1"/>
@@ -47,7 +51,6 @@
 - [8. Hardware & Browser Media Pipeline](#8-hardware--browser-media-pipeline)
 - [9. Quick Start & Execution Modes](#9-quick-start--execution-modes)
 - [10. Production Deployment Specifications](#10-production-deployment-specifications)
-
 
 ---
 
@@ -90,7 +93,6 @@ graph TB
     Sub1 -.-> SUPA
 ```
 
-
 ---
 
 ## 2. Multi-Agent Topology
@@ -100,26 +102,36 @@ The platform coordinates five specialized neural agents configured with distinct
 <p align="center">
   <svg width="780" height="230" viewBox="0 0 780 230" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="780" height="230" rx="12" fill="#0B0F19" stroke="#1E293B"/>
+    
+    <!-- Node 1 -->
     <rect x="25" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/>
     <rect x="40" y="45" width="24" height="24" rx="6" fill="#0369A1"/>
     <text x="40" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Orchestrator</text>
     <text x="40" y="108" fill="#38BDF8" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">STATE HARMONY</text>
     <text x="40" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Manages session cross-sync, module telemetry, and context persistence.</text>
+
+    <!-- Node 2 -->
     <rect x="175" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#6366F1" stroke-width="1.5"/>
     <rect x="190" y="45" width="24" height="24" rx="6" fill="#4338CA"/>
     <text x="190" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Auditor</text>
     <text x="190" y="108" fill="#818CF8" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">ATS SCANNER</text>
     <text x="190" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Forensically parses structure, action verbs, and skill density gap.</text>
+
+    <!-- Node 3 -->
     <rect x="325" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
     <rect x="340" y="45" width="24" height="24" rx="6" fill="#047857"/>
     <text x="340" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Architect</text>
     <text x="340" y="108" fill="#34D399" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">VOICE BUILDER</text>
     <text x="340" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Converts spoken narrative and unstructured oral input to structured ATS resumes.</text>
+
+    <!-- Node 4 -->
     <rect x="475" y="30" width="135" height="170" rx="10" fill="#0F172A" stroke="#F43F5E" stroke-width="1.5"/>
     <rect x="490" y="45" width="24" height="24" rx="6" fill="#BE123C"/>
     <text x="490" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Adversary</text>
     <text x="490" y="108" fill="#FB7185" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">INTERVIEW SIM</text>
     <text x="490" y="130" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">Executes rigorous technical probing, dynamic pressure tests, and follow-ups.</text>
+
+    <!-- Node 5 -->
     <rect x="625" y="30" width="130" height="170" rx="10" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/>
     <rect x="640" y="45" width="24" height="24" rx="6" fill="#B45309"/>
     <text x="640" y="90" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Coach</text>
@@ -135,7 +147,6 @@ The platform coordinates five specialized neural agents configured with distinct
 | `resume_architect` | Resume Architect | Supportive | Synthesizes oral responses into high-density ATS bullets | `src/lib/groq.ts` |
 | `vault_adversary` | Mock Interviewer | Adversarial | Runs multi-turn high-stakes technical interrogation | `src/components/VaultSimulator.tsx` |
 | `comm_coach` | Speech Coach | Analytical | Evaluates audio cadence, latency, and pacing metrics | Web Speech Recognition API |
-
 
 ---
 
@@ -183,7 +194,6 @@ sequenceDiagram
     UI-->>Candidate: Export formal Candidate Evaluation Report
 ```
 
-
 ---
 
 ## 4. Deterministic ATS Scoring Equation & Weights
@@ -193,25 +203,38 @@ The ATS algorithm calculates an audit score bounded between `0` and `100` points
 <p align="center">
   <svg width="780" height="200" viewBox="0 0 780 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="780" height="200" rx="12" fill="#0B0F19" stroke="#1E293B"/>
+    
+    <!-- Weight Bar Container -->
     <rect x="40" y="35" width="700" height="28" rx="6" fill="#1E293B"/>
     <rect x="40" y="35" width="280" height="28" rx="6" fill="#38BDF8"/>
     <rect x="320" y="35" width="175" height="28" fill="#6366F1"/>
     <rect x="495" y="35" width="140" height="28" fill="#10B981"/>
     <rect x="635" y="35" width="105" height="28" rx="0 6 6 0" fill="#F59E0B"/>
+
+    <!-- Labels on Bar -->
     <text x="145" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">KEYWORDS: 40%</text>
     <text x="365" y="54" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">STRUCTURE: 25%</text>
     <text x="525" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">IMPACT: 20%</text>
     <text x="655" y="54" fill="#041E42" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">VERBS: 15%</text>
+
+    <!-- Legend Blocks -->
     <g transform="translate(40, 85)">
+      <!-- Item 1 -->
       <circle cx="8" cy="8" r="6" fill="#38BDF8"/>
       <text x="22" y="12" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Keyword Alignment (40 Points)</text>
       <text x="22" y="30" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Bi-gram and tri-gram n-gram extraction against target job specification.</text>
+
+      <!-- Item 2 -->
       <circle cx="370" cy="8" r="6" fill="#6366F1"/>
       <text x="384" y="12" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Structural Integrity (25 Points)</text>
       <text x="384" y="30" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Experience, Education, Skills, Projects, Summary, and Contact headers.</text>
+
+      <!-- Item 3 -->
       <circle cx="8" cy="65" r="6" fill="#10B981"/>
       <text x="22" y="69" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Quantifiable Metrics (20 Points)</text>
       <text x="22" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Revenue figures, percent increases, user counts, and engineering scale.</text>
+
+      <!-- Item 4 -->
       <circle cx="370" cy="65" r="6" fill="#F59E0B"/>
       <text x="384" y="69" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Action Verb Density (15 Points)</text>
       <text x="384" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Active leadership verbs checked against 100+ high-impact terms corpus.</text>
@@ -225,6 +248,11 @@ The ATS algorithm calculates an audit score bounded between `0` and `100` points
 Final ATS Score = (KeywordScore * 0.40) + (StructureScore * 0.25) + (ImpactScore * 0.20) + (VerbScore * 0.15)
 ```
 
+Where:
+- **KeywordScore**: Ratio of matched non-stopword n-grams against job requirements.
+- **StructureScore**: Normalized detection of mandatory ATS section boundaries.
+- **ImpactScore**: Metric density derived from occurrences of `[0-9]+%`, `\$[0-9]+[kKmMbB]?`, and scale integers.
+- **VerbScore**: Density of active leadership power verbs initiating bullet points.
 
 ---
 
@@ -320,7 +348,6 @@ graph LR
 
 </details>
 
-
 ---
 
 ## 6. High-Frequency Interview Vault Architecture
@@ -356,7 +383,6 @@ stateDiagram-v2
     Final --> [*]
 ```
 
-
 ---
 
 ## 7. Dual-Engine Data Storage Topology
@@ -366,6 +392,8 @@ The platform provides complete operational capability in both online and air-gap
 <p align="center">
   <svg width="780" height="220" viewBox="0 0 780 220" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="780" height="220" rx="12" fill="#0B0F19" stroke="#1E293B"/>
+    
+    <!-- Left Box: Client -->
     <rect x="30" y="30" width="210" height="160" rx="10" fill="#0F172A" stroke="#38BDF8"/>
     <text x="50" y="60" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">Client Local Storage</text>
     <text x="50" y="80" fill="#38BDF8" font-family="-apple-system, sans-serif" font-size="10">OFFLINE RESILIENCE</text>
@@ -373,8 +401,12 @@ The platform provides complete operational capability in both online and air-gap
     <text x="50" y="125" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">awaken-profile-{uid}</text>
     <text x="50" y="145" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">awaken-roadmap-progress</text>
     <text x="50" y="165" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">awaken-assistant-muted</text>
+
+    <!-- Arrow 1 -->
     <path d="M 240 110 L 290 110" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 2"/>
     <polygon points="290,105 300,110 290,115" fill="#38BDF8"/>
+
+    <!-- Middle Box: PHP Server -->
     <rect x="300" y="30" width="180" height="160" rx="10" fill="#0F172A" stroke="#6366F1"/>
     <text x="320" y="60" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="13" font-weight="700">PHP 8.2+ Gateway</text>
     <text x="320" y="80" fill="#818CF8" font-family="-apple-system, sans-serif" font-size="10">REST API DISPATCHER</text>
@@ -382,14 +414,20 @@ The platform provides complete operational capability in both online and air-gap
     <text x="320" y="125" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">CORS Preflight Policy</text>
     <text x="320" y="145" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Visual Admin Viewer</text>
     <text x="320" y="165" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="10">Automatic Schema Init</text>
+
+    <!-- Arrow 2 -->
     <path d="M 480 85 L 530 65" stroke="#10B981" stroke-width="2"/>
     <polygon points="530,60 539,64 532,70" fill="#10B981"/>
     <path d="M 480 135 L 530 155" stroke="#F59E0B" stroke-width="2"/>
     <polygon points="532,150 539,156 530,160" fill="#F59E0B"/>
+
+    <!-- Right Box: SQLite -->
     <rect x="540" y="30" width="210" height="70" rx="8" fill="#0F172A" stroke="#10B981"/>
     <text x="560" y="55" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">SQLite (Zero Setup)</text>
     <text x="560" y="72" fill="#34D399" font-family="-apple-system, sans-serif" font-size="10">Local server/database.sqlite</text>
     <text x="560" y="87" fill="#94A3B8" font-family="-apple-system, sans-serif" font-size="9">WAL Mode, Auto-initialization</text>
+
+    <!-- Right Box: MySQL -->
     <rect x="540" y="120" width="210" height="70" rx="8" fill="#0F172A" stroke="#F59E0B"/>
     <text x="560" y="145" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">MySQL (Production)</text>
     <text x="560" y="162" fill="#FBBF24" font-family="-apple-system, sans-serif" font-size="10">cPanel / Hostinger / Cloud SQL</text>
@@ -426,8 +464,26 @@ CREATE TABLE profiles (
     portfolio VARCHAR(255),
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-```
 
+-- ATS diagnostic scan records
+CREATE TABLE resume_scans (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id VARCHAR(64),
+    type VARCHAR(50),
+    ats_score INTEGER,
+    analysis_json TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Domain assessment test evaluations
+CREATE TABLE test_scores (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id VARCHAR(64),
+    topic VARCHAR(150),
+    score INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
 
 ---
 
@@ -466,7 +522,6 @@ graph TD
     VID --> MR
 ```
 
-
 ---
 
 ## 9. Quick Start & Execution Modes
@@ -503,7 +558,6 @@ VITE_PHP_API_URL="http://127.0.0.1:8000/api"
 VITE_SUPABASE_URL="https://your-project.supabase.co"
 VITE_SUPABASE_ANON_KEY="your-supabase-anon-key"
 ```
-
 
 ---
 
