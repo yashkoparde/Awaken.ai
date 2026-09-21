@@ -6,9 +6,13 @@ import { FileSearch, AlertCircle, Upload, Download, Check, Sparkles, CheckCircle
 import { extractResumeText, auditResumeWithGroq } from '../lib/groq';
 import { calculateATSScore, ATSAnalysisResult } from '../lib/atsAlgorithm';
 
-export default function ResumeBuilder() {
+export default function ResumeBuilder({ focusMode = 'all' }: { focusMode?: 'all' | 'resume' | 'job' }) {
   const [content, setContent] = useState('');
-  const [jobDescription, setJobDescription] = useState('');
+  const [jobDescription, setJobDescription] = useState(
+    focusMode === 'resume' 
+      ? 'Software Engineer with experience in algorithms, data structures, full-stack architecture, clean code, Git, microservices, and system reliability.' 
+      : ''
+  );
   const [isGenerating, setIsGenerating] = useState(false);
   const [isExtracting, setIsExtracting] = useState(false);
   const [result, setResult] = useState<ATSAnalysisResult | null>(null);
@@ -114,13 +118,19 @@ ${result.optimizedBulletPoints && result.optimizedBulletPoints.length > 0 ? `REC
       {/* Title Header */}
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] uppercase font-mono tracking-widest text-blue-500 font-bold">Awaken ATS Core</span>
+          <span className="text-[10px] uppercase font-mono tracking-widest text-blue-500 font-bold">
+            {focusMode === 'job' ? 'Module 2: Job Description Engine' : focusMode === 'resume' ? 'Module 1: AI Resume Analyzer' : 'Awaken ATS Core'}
+          </span>
           <span className="text-white/20">•</span>
           <span className="text-[10px] uppercase font-mono tracking-widest text-emerald-400 font-bold">Groq Llama-3 + ATS Algo</span>
         </div>
-        <h2 className="text-3xl font-extrabold tracking-tight text-white">ATS Forensic Scanner & Match Algorithm</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight text-white">
+          {focusMode === 'job' ? 'Job Description Analyzer & Extraction' : focusMode === 'resume' ? 'AI Resume Analyzer & ATS Audit' : 'ATS Forensic Scanner & Match Algorithm'}
+        </h2>
         <p className="text-xs text-slate-400 mt-1 max-w-2xl">
-          Deterministic applicant tracking algorithm evaluating keyword match, structural compliance, quantifiable metrics, and active verbs, augmented with Groq AI analysis.
+          {focusMode === 'job' 
+            ? 'Paste or analyze target job postings. Extract core technical skills, required frameworks, qualifications, responsibilities, and key ATS keywords.'
+            : 'Extract education, skills, projects, certifications, internships, and experience from PDF/DOCX resumes. Identify missing or weak sections.'}
         </p>
       </div>
 
