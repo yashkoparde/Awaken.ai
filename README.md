@@ -44,7 +44,7 @@ graph TB
     end
 
     subgraph Inference_Mesh["LLM Inference Mesh (Groq High-Speed Fabric)"]
-        M1["Primary LLM Node: openai/gpt-oss-120b"]
+        M1["Primary: openai/gpt-oss-120b"]
         M2["Fast: openai/gpt-oss-20b"]
         M3["Fallback 1: llama-3.3-70b-versatile"]
         M4["Fallback 2: llama-3.1-8b-instant"]
