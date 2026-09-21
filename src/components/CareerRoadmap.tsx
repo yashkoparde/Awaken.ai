@@ -37,6 +37,7 @@ export default function CareerRoadmap() {
   });
 
   const [activeMilestoneId, setActiveMilestoneId] = useState<number>(1);
+  const [roadmapMode, setRoadmapMode] = useState<'week-wise' | 'day-wise'>('week-wise');
 
   const [taskProgress, setTaskProgress] = useState<Record<string, boolean>>(() => {
     try {
@@ -53,6 +54,69 @@ export default function CareerRoadmap() {
     const exp = profile?.experience || "Entry Level";
     const domain = profile?.domain || "Technology";
     const targetJob = profile?.targetJob || "";
+
+    if (roadmapMode === 'day-wise') {
+      return [
+        {
+          id: 1,
+          title: "Days 1–7: Skill Gap Triage & Target Baseline",
+          description: `Diagnose core deficiencies in ${role} requirements and establish disciplined daily fundamentals.`,
+          duration: "Day 1 to 7",
+          focusArea: "Technical & Programming Gap Identification",
+          tasks: [
+            { id: "d1", text: "Day 1-2: Audit resume against 5 target job postings using Resume-Job Matching Engine", done: false },
+            { id: "d2", text: "Day 3-4: Close priority Technical & Programming syntax gaps (e.g. TypeScript, SQL)", done: false },
+            { id: "d3", text: "Day 5-7: Build and commit minimum viable project demonstrating missing technologies", done: false }
+          ],
+          resources: [`${role} Rapid Onboarding Guide`, "Daily Code Kata & DSA Drills", "Git Modular Project Starters"]
+        },
+        {
+          id: 2,
+          title: "Days 8–14: Quantitative Aptitude & Reasoning Sprint",
+          description: "Intensive 7-day aptitude mastery covering quantitative math, logical patterns, and verbal comprehension.",
+          duration: "Day 8 to 14",
+          focusArea: "Aptitude, Verbal & Reasoning Drills",
+          tasks: [
+            { id: "d4", text: "Day 8-9: Complete 3 timed Quantitative Aptitude assessments in Written Test module", done: false },
+            { id: "d5", text: "Day 10-11: Solve 25 Logical Reasoning puzzles and deductive pattern challenges", done: false },
+            { id: "d6", text: "Day 12-14: Review Verbal Ability reading comprehension and error correction sets", done: false }
+          ],
+          resources: ["Quantitative Formulas Cheat Sheet", "Logical Deduction Shortcuts", "Verbal Comprehension Playbook"]
+        },
+        {
+          id: 3,
+          title: "Days 15–21: Technical Architecture & Coding Depth",
+          description: "Execute deep coding assessments, system design principles, and database optimizations.",
+          duration: "Day 15 to 21",
+          focusArea: "System Design, Microservices & Data Structures",
+          tasks: [
+            { id: "d7", text: "Day 15-17: Solve 10 medium/hard DSA questions under timed simulation conditions", done: false },
+            { id: "d8", text: "Day 18-19: Document database schema trade-offs (Indexing, Sharding, Caching)", done: false },
+            { id: "d9", text: "Day 20-21: Run Practice Q&A technical round questions with AI evaluator", done: false }
+          ],
+          resources: ["System Architecture Design Patterns", "Database Indexing Manual", "Live Coding Interview Framework"]
+        },
+        {
+          id: 4,
+          title: "Days 22–30: AI Mock Simulator & Placement Readiness",
+          description: "Engage in multi-round mock interviews (Technical, HR, Behavioral) with real video/voice telemetry.",
+          duration: "Day 22 to 30",
+          focusArea: "Interactive Mock Interviews & Behavioral Polish",
+          tasks: [
+            { id: "d10", text: "Day 22-24: Complete 2 Technical and 2 HR mock interviews on Mock Interview simulator", done: false },
+            { id: "d11", text: "Day 25-27: Review 6-Dimension Scorecard (Confidence, Depth, Communication, Poise)", done: false },
+            { id: "d12", text: "Day 28-30: Finalize ATS-optimized resume export and submit to targeted corporate roles", done: false }
+          ],
+          resources: ["Behavioral STAR Response Matrix", "Executive Poise & Voice Confidence Guide", "Salary Negotiation Masterclass"]
+        }
+      ].map(m => ({
+        ...m,
+        tasks: m.tasks.map(t => ({
+          ...t,
+          done: !!taskProgress[t.id]
+        }))
+      }));
+    }
 
     const generated: MilestoneItem[] = [
       {
@@ -201,9 +265,29 @@ export default function CareerRoadmap() {
           </p>
         </div>
         
-        {/* Progress Circle & Metrics */}
-        <div className="flex items-center gap-6 bg-slate-900/60 border border-white/5 p-5 rounded-2xl backdrop-blur-md">
-          <div className="relative w-16 h-16 flex items-center justify-center">
+        {/* Progress Circle & Metrics & Mode Switch */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-slate-900/60 border border-white/5 p-4 rounded-2xl backdrop-blur-md">
+          <div className="flex bg-slate-950 p-1 rounded-xl border border-white/10">
+            <button
+              onClick={() => { setRoadmapMode('week-wise'); setActiveMilestoneId(1); }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                roadmapMode === 'week-wise' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Week-Wise (16 Wks)
+            </button>
+            <button
+              onClick={() => { setRoadmapMode('day-wise'); setActiveMilestoneId(1); }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                roadmapMode === 'day-wise' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Day-Wise (30 Days)
+            </button>
+          </div>
+
+          <div className="flex items-center gap-4 pl-2 border-l border-white/5">
+            <div className="relative w-14 h-14 flex items-center justify-center">
             {/* SVG circle meter */}
             <svg className="absolute inset-0 w-full h-full -rotate-90">
               <circle cx="32" cy="32" r="28" stroke="rgba(255,255,255,0.03)" strokeWidth="4" fill="none" />
@@ -226,6 +310,7 @@ export default function CareerRoadmap() {
             <p className="text-sm font-bold text-emerald-400">{progressPercent === 100 ? "Ready for Market!" : "In Progress"}</p>
           </div>
         </div>
+      </div>
       </div>
 
       {/* Timeline Layout */}
