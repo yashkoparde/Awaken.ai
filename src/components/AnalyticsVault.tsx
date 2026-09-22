@@ -21,7 +21,7 @@ import { supabase, auth } from '../lib/supabase';
 import { api } from '../lib/api';
 
 
-export default function AnalyticsVault() {
+export default function AnalyticsVault({ viewMode = 'all' }: { viewMode?: 'all' | 'dashboard' | 'readiness' }) {
   const [sessionData, setSessionData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showExportModal, setShowExportModal] = useState(false);
@@ -190,9 +190,17 @@ export default function AnalyticsVault() {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/5 pb-8">
         <div className="space-y-2">
-          <p className="text-[10px] text-blue-500 font-bold uppercase tracking-[0.3em]">Insights Terminal</p>
-          <h2 className="text-4xl font-extrabold tracking-tight text-white animate-fade-in">Performance Metrics</h2>
-          <p className="text-slate-400 text-sm font-medium">Quantifying your professional evolution across key competency vectors.</p>
+          <p className="text-[10px] text-blue-500 font-bold uppercase tracking-[0.3em]">
+            {viewMode === 'readiness' ? 'Module 12: Placement Readiness Score' : 'Module 11: Progress Dashboard'}
+          </p>
+          <h2 className="text-4xl font-extrabold tracking-tight text-white animate-fade-in">
+            {viewMode === 'readiness' ? 'Placement Readiness Scorecard' : 'Comprehensive Progress Dashboard'}
+          </h2>
+          <p className="text-slate-400 text-sm font-medium">
+            {viewMode === 'readiness' 
+              ? 'Multi-dimensional readiness index assessing ATS alignment, technical competency, mock interview scores, and non-verbal poise.'
+              : 'Quantifying your professional evolution, completed milestone trajectories, and assessment score telemetry.'}
+          </p>
         </div>
         <div className="flex gap-3">
            <button 
