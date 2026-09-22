@@ -334,8 +334,8 @@ export default function WarMap({ user }: { user: UserProfile }) {
                   {activeModule === 'prep-plan' && <CareerRoadmap />}
                   {activeModule === 'interview-sim' && <VaultSimulator mode="technical" />}
                   {activeModule === 'interview-eval' && <VaultSimulator showEvaluationDirectly={true} />}
-                  {activeModule === 'coding-assessment' && <WrittenTest defaultCategory="coding" />}
-                  {activeModule === 'aptitude-prep' && <WrittenTest defaultCategory="quant" />}
+                  {activeModule === 'coding-assessment' && <WrittenTest defaultCategory="coding" moduleMode="technical" />}
+                  {activeModule === 'aptitude-prep' && <WrittenTest defaultCategory="quant" moduleMode="aptitude" />}
                   {activeModule === 'career-recommend' && <CareerRecommendations />}
                   {activeModule === 'progress-dashboard' && <AnalyticsVault viewMode="dashboard" />}
                   {activeModule === 'readiness-score' && <PlacementReadinessScore />}

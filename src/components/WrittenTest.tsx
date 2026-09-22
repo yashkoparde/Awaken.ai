@@ -6,9 +6,19 @@ import { api } from '../lib/api';
 import { generateWrittenTestViaGroq } from '../lib/groq';
 
 
-export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCategory?: 'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal' }) {
+interface WrittenTestProps {
+  defaultCategory?: 'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal';
+  moduleMode?: 'technical' | 'aptitude';
+}
+
+export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTestProps) {
+  // Determine actual mode
+  const isAptitudeMode = moduleMode === 'aptitude' || (defaultCategory && ['quant', 'logical', 'verbal'].includes(defaultCategory));
+  const effectiveMode = isAptitudeMode ? 'aptitude' : 'technical';
+
+  const initialCat = defaultCategory || (isAptitudeMode ? 'quant' : 'mcq');
   const [topic, setTopic] = useState('');
-  const [category, setCategory] = useState<'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal'>(defaultCategory);
+  const [category, setCategory] = useState<'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal'>(initialCat);
   const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
   const [isGenerating, setIsGenerating] = useState(false);
   const [questions, setQuestions] = useState<any[]>([]);
@@ -16,13 +26,36 @@ export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCatego
   const [showResults, setShowResults] = useState(false);
   const [evaluation, setEvaluation] = useState<any>(null);
 
-  const startTest = async () => {
-    const activeTopic = topic || (category === 'quant' ? 'Quantitative Aptitude' : category === 'logical' ? 'Logical Reasoning' : category === 'verbal' ? 'Verbal Ability' : category === 'sql' ? 'SQL Databases' : 'Software Engineering');
+  // Read onboarding profile to align questions with role and domain
+  const [profile] = useState<any>(() => {
+    try {
+      const saved = localStorage.getItem('awaken-onboarding-profile') || localStorage.getItem('yogyata-onboarding-profile');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  // Default topic derived from candidate's profile role / domain
+  const candidateRole = profile?.role || profile?.targetJob || profile?.domain || 'Software Engineer';
+
+  const startTest = async (overrideTopic?: string, overrideCategory?: any) => {
+    const activeCat = overrideCategory || category;
+    let fallbackTopic = candidateRole;
+    if (activeCat === 'quant') fallbackTopic = 'Arithmetic, Algebra & Probability';
+    else if (activeCat === 'logical') fallbackTopic = 'Logical Reasoning & Pattern Analysis';
+    else if (activeCat === 'verbal') fallbackTopic = 'Verbal Ability & Reading Comprehension';
+    else if (activeCat === 'sql') fallbackTopic = `${candidateRole} - SQL Queries & Schema Design`;
+    else if (activeCat === 'coding') fallbackTopic = `${candidateRole} - Algorithms & Data Structures`;
+    else if (activeCat === 'debugging') fallbackTopic = `${candidateRole} - Bug Isolation & Code Fixes`;
+    else fallbackTopic = `${candidateRole} - Core Concepts & Architecture`;
+
+    const activeTopic = overrideTopic || topic || fallbackTopic;
     setIsGenerating(true);
     setAnswers({});
     setShowResults(false);
     try {
-      const data = await generateWrittenTestViaGroq(activeTopic, category, difficulty);
+      const data = await generateWrittenTestViaGroq(activeTopic, activeCat, difficulty);
       setQuestions(data);
     } catch (err) {
       console.error(err);
@@ -31,6 +64,21 @@ export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCatego
     }
   };
 
+  // Pre-populate and auto-load on initial mount
+  React.useEffect(() => {
+    if (questions.length === 0 && !isGenerating) {
+      if (effectiveMode === 'technical') {
+        const initialTechTopic = `${candidateRole} - Core Systems`;
+        setTopic(initialTechTopic);
+        startTest(initialTechTopic, category);
+      } else {
+        const initialAptTopic = 'Arithmetic & Numerical Reasoning';
+        setTopic(initialAptTopic);
+        startTest(initialAptTopic, category);
+      }
+    }
+  }, []);
+
   const submitTest = async () => {
     setShowResults(true);
     let score = 0;
@@ -38,10 +86,10 @@ export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCatego
       if (answers[i] === q.correctAnswer) score++;
     });
     
-    const finalScore = Math.round((score / questions.length) * 100);
+    const finalScore = questions.length > 0 ? Math.round((score / questions.length) * 100) : 0;
     setEvaluation({ score: finalScore });
 
-    // Sync to PHP Backend
+    // Sync to Backend
     const activeTopic = topic || category.toUpperCase();
     await api.saveTestScore(`${activeTopic} (${difficulty.toUpperCase()})`, finalScore);
 
@@ -60,6 +108,22 @@ export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCatego
     }
   };
 
+  // Category sets based on module mode
+  const technicalCategories = [
+    { id: 'mcq' as const, label: 'Technical MCQs' },
+    { id: 'coding' as const, label: 'Coding Problems' },
+    { id: 'sql' as const, label: 'SQL Challenges' },
+    { id: 'debugging' as const, label: 'Debugging Tasks' }
+  ];
+
+  const aptitudeCategories = [
+    { id: 'quant' as const, label: 'Quantitative Aptitude' },
+    { id: 'logical' as const, label: 'Logical Reasoning' },
+    { id: 'verbal' as const, label: 'Verbal Ability' }
+  ];
+
+  const availableCategories = effectiveMode === 'technical' ? technicalCategories : aptitudeCategories;
+
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8 pb-20 font-sans">
       <div className="space-y-4">
@@ -67,37 +131,36 @@ export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCatego
           <div className="flex items-center gap-2 text-blue-400 mb-1">
             <Terminal className="w-3.5 h-3.5" />
             <span className="text-[10px] uppercase font-mono font-bold tracking-widest">
-              {['quant', 'logical', 'verbal'].includes(category) ? 'Module 9: Aptitude Preparation' : 'Module 8: Coding & Technical Assessment'}
+              {effectiveMode === 'aptitude' ? 'Module 9: Aptitude Preparation & Diagnostic Engine' : 'Module 8: Coding & Technical Assessment'}
             </span>
           </div>
           <h2 className="text-3xl font-extrabold tracking-tight text-white">
-            {['quant', 'logical', 'verbal'].includes(category) ? 'Aptitude Preparation & Diagnostic Engine' : 'Coding & Technical Assessment'}
+            {effectiveMode === 'aptitude' ? 'Aptitude Preparation & Diagnostic Engine' : 'Coding & Technical Assessment'}
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            {['quant', 'logical', 'verbal'].includes(category) 
+            {effectiveMode === 'aptitude' 
               ? 'Generate quantitative aptitude, logical reasoning, and verbal ability questions with difficulty levels and performance tracking.'
-              : 'Generate role-specific coding questions, algorithmic problems, SQL challenges, and debugging tasks.'}
+              : `Generate role-specific coding questions, algorithmic problems, SQL challenges, and debugging tasks calibrated for ${candidateRole}.`}
           </p>
         </div>
 
         {/* Category Selector Tabs */}
         <div className="flex flex-wrap gap-2">
-          {[
-            { id: 'mcq', label: 'Technical MCQs' },
-            { id: 'coding', label: 'Coding Problems' },
-            { id: 'sql', label: 'SQL Challenges' },
-            { id: 'debugging', label: 'Debugging Tasks' },
-            { id: 'quant', label: 'Quantitative Aptitude' },
-            { id: 'logical', label: 'Logical Reasoning' },
-            { id: 'verbal', label: 'Verbal Ability' }
-          ].map(c => (
+          {availableCategories.map(c => (
             <button
               key={c.id}
               onClick={() => {
-                setCategory(c.id as any);
-                if (c.id === 'quant' && !topic) setTopic('Arithmetic & Probability');
-                if (c.id === 'logical' && !topic) setTopic('Patterns & Syllogisms');
-                if (c.id === 'verbal' && !topic) setTopic('Reading Comprehension & Grammar');
+                setCategory(c.id);
+                let defaultT = '';
+                if (c.id === 'quant') defaultT = 'Arithmetic & Numerical Reasoning';
+                else if (c.id === 'logical') defaultT = 'Logical Reasoning & Deductive Logic';
+                else if (c.id === 'verbal') defaultT = 'Verbal Ability & Grammar Accuracy';
+                else if (c.id === 'coding') defaultT = `${candidateRole} - Algorithmic Challenges`;
+                else if (c.id === 'sql') defaultT = `${candidateRole} - SQL & Relational Models`;
+                else if (c.id === 'debugging') defaultT = `${candidateRole} - Defect Triage & Code Fixes`;
+                else defaultT = `${candidateRole} - Core System Concepts`;
+                setTopic(defaultT);
+                startTest(defaultT, c.id);
               }}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all border cursor-pointer ${
                 category === c.id 
@@ -136,7 +199,7 @@ export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCatego
           />
           
           <button 
-            onClick={startTest}
+            onClick={() => startTest()}
             disabled={isGenerating}
             className="w-full sm:w-auto py-2.5 px-6 bg-blue-600 border border-blue-500 rounded-xl text-white font-black uppercase text-xs tracking-widest hover:bg-blue-500 transition-all disabled:opacity-50 cursor-pointer shrink-0"
           >
