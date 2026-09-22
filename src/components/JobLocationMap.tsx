@@ -180,7 +180,7 @@ export default function JobLocationMap({
       {/* Bottom Metadata Info */}
       <div className="absolute bottom-3 left-3 z-[400] bg-slate-950/90 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10 text-[9px] text-slate-400 font-mono flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-        <span>OpenStreetMap Leaflet GIS (No API Key Required)</span>
+        <span>CartoDB Dark Tile GIS • Live Geospatial Radar</span>
       </div>
     </div>
   );

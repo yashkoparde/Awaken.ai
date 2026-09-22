@@ -320,7 +320,7 @@ ${skillsInput}`;
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                Leaflet GIS radar with subtle ambient cartography, localized markers and no API key requirement
+                Live geographical opportunity radar with geocoded employment nodes and localized markers
               </p>
             </div>
           </div>

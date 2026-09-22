@@ -335,7 +335,7 @@ export const generateWrittenTestViaGroq = async (
 
   const client = getGroqClient();
   if (!client) {
-    return getFallbackQuestions(category, topic);
+    return getFallbackQuestions(category, difficulty, topic);
   }
 
   try {
@@ -353,12 +353,12 @@ Return ONLY a valid JSON object with a single key "questions" containing an arra
     const parsed = JSON.parse(raw);
     const list = Array.isArray(parsed) ? parsed : (parsed.questions || parsed.data || parsed.items || []);
     if (Array.isArray(list) && list.length > 0) {
-      return list;
+      return list.map((q: any) => ({ ...q, difficulty }));
     }
-    return getFallbackQuestions(category, topic);
+    return getFallbackQuestions(category, difficulty, topic);
   } catch (err) {
     console.warn("Groq written test generation error, utilizing verified assessment bank:", err);
-    return getFallbackQuestions(category, topic);
+    return getFallbackQuestions(category, difficulty, topic);
   }
 };
 

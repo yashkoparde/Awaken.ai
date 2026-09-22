@@ -40,8 +40,9 @@ export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTest
   // Default topic derived from candidate's profile role / domain
   const candidateRole = profile?.role || profile?.targetJob || profile?.domain || 'Software Engineer';
 
-  const startTest = async (overrideTopic?: string, overrideCategory?: any) => {
+  const startTest = async (overrideTopic?: string, overrideCategory?: any, overrideDifficulty?: 'easy' | 'medium' | 'hard') => {
     const activeCat = overrideCategory || category;
+    const activeDiff = overrideDifficulty || difficulty;
     let fallbackTopic = candidateRole;
     if (activeCat === 'quant') fallbackTopic = 'Arithmetic, Algebra & Probability';
     else if (activeCat === 'logical') fallbackTopic = 'Logical Reasoning & Pattern Analysis';
@@ -56,15 +57,15 @@ export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTest
     setAnswers({});
     setShowResults(false);
     try {
-      const data = await generateWrittenTestViaGroq(activeTopic, activeCat, difficulty);
+      const data = await generateWrittenTestViaGroq(activeTopic, activeCat, activeDiff);
       if (Array.isArray(data) && data.length > 0) {
         setQuestions(data);
       } else {
-        setQuestions(getFallbackQuestions(activeCat, activeTopic));
+        setQuestions(getFallbackQuestions(activeCat, activeDiff, activeTopic));
       }
     } catch (err) {
       console.warn("Falling back to local question bank:", err);
-      setQuestions(getFallbackQuestions(activeCat, activeTopic));
+      setQuestions(getFallbackQuestions(activeCat, activeDiff, activeTopic));
     } finally {
       setIsGenerating(false);
     }
@@ -185,10 +186,13 @@ export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTest
             {(['easy', 'medium', 'hard'] as const).map(d => (
               <button
                 key={d}
-                onClick={() => setDifficulty(d)}
-                className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+                onClick={() => {
+                  setDifficulty(d);
+                  startTest(topic, category, d);
+                }}
+                className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${
                   difficulty === d 
-                    ? 'bg-blue-600 text-white' 
+                    ? 'bg-blue-600 text-white shadow-md' 
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -219,11 +223,22 @@ export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTest
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
             {questions.map((q, i) => (
               <div key={i} className={`p-8 bg-slate-900 border border-white/5 rounded-3xl transition-all ${showResults ? 'pointer-events-none' : ''}`}>
-                 <div className="flex gap-4 mb-6">
-                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold">
-                       {i + 1}
+                 <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xs font-bold shrink-0 mt-0.5">
+                         {i + 1}
+                      </div>
+                      <h4 className="text-lg font-bold text-white tracking-tight">{q.question}</h4>
                     </div>
-                    <h4 className="text-lg font-bold text-white tracking-tight">{q.question}</h4>
+                    <span className={`px-2.5 py-1 rounded-md text-[9px] font-mono font-bold uppercase tracking-wider shrink-0 ${
+                      (q.difficulty || difficulty) === 'easy'
+                        ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                        : (q.difficulty || difficulty) === 'hard'
+                        ? 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
+                        : 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
+                    }`}>
+                      {q.difficulty || difficulty}
+                    </span>
                  </div>
 
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
