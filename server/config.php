@@ -19,4 +19,4 @@ define('SECRET_KEY', getenv('SECRET_KEY') ?: 'awaken_ai_secret_token_key_2026');
 define('ALLOWED_ORIGIN', getenv('ALLOWED_ORIGIN') ?: '*');
 
 // Hosted Frontend App URL (e.g. your Netlify URL or Cloudflare URL)
-define('FRONTEND_URL', getenv('FRONTEND_URL') ?: 'https://awakena-ai.netlify.app');
+define('FRONTEND_URL', getenv('FRONTEND_URL') ?: 'https://awaken-in.netlify.app');

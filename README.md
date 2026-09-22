@@ -3,6 +3,9 @@
 </p>
 
 <p align="center">
+  <a href="https://awaken-in.netlify.app" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Hosted%20App-awaken--in.netlify.app-00DC82?style=for-the-badge&logo=netlify&labelColor=0f172a" alt="Live Hosted App" />
+  </a>
   <img src="https://img.shields.io/badge/Architecture-Distributed%20Multi--Agent-0ea5e9?style=for-the-badge&labelColor=0f172a" alt="Architecture" />
   <img src="https://img.shields.io/badge/ATS%20Scoring-Deterministic%20%2B%20LLM-6366f1?style=for-the-badge&labelColor=0f172a" alt="ATS Scoring" />
   <img src="https://img.shields.io/badge/Engine-Groq%20%7C%20Llama--3.3%20%7C%20GPT--OSS-8b5cf6?style=for-the-badge&labelColor=0f172a" alt="Groq Engine" />
@@ -481,7 +484,8 @@ VITE_SUPABASE_ANON_KEY="your-supabase-anon-key"
 5. The included `server/.htaccess` file routes all `/api/*` endpoints through `server/index.php`.
 
 ### Static Edge Deployment (Netlify / Vercel)
-- **Netlify**: Configuration managed via `netlify.toml` with single-page application redirect rules:
+- **Live Production App**: **[awaken-in.netlify.app](https://awaken-in.netlify.app)**
+- **Netlify**: Continuous deployment pipeline connected to `main` branch with automated builds (`npm run build` $\rightarrow$ `dist/`). Configuration managed via `netlify.toml` with single-page application redirect rules:
   ```toml
   [[redirects]]
     from = "/*"
