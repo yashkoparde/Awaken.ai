@@ -362,16 +362,79 @@ Return ONLY a valid JSON object with a single key "questions" containing an arra
   }
 };
 
+import { evaluateCandidateTurnLocally, ROUND_QUESTIONS } from "./interviewEngine";
+
 /**
  * Interactive Mock Interview Response via Groq
+ * Produces structured 4-stage response:
+ * 1. Understanding & comprehension of candidate response
+ * 2. Feedback (strengths, improvement gaps, score rating)
+ * 3. Model / Ideal Answer
+ * 4. Next contextual follow-up question
+ */
+export const getInterviewTurnViaGroq = async (
+  currentQuestion: string,
+  candidateResponse: string,
+  round: string,
+  questionIdx: number,
+  targetRole: string
+) => {
+  const client = getGroqClient();
+  if (!client) {
+    return evaluateCandidateTurnLocally(currentQuestion, candidateResponse, round, questionIdx);
+  }
+
+  const system = `You are a Principal Technical Interviewer and Executive Career Assessor for ${targetRole || 'Software Engineering'}.
+The candidate just answered this interview question: "${currentQuestion}"
+Candidate's response: "${candidateResponse}"
+
+Perform a structured evaluation. You MUST return ONLY a valid JSON object matching this schema:
+{
+  "understanding": "1-2 sentences summarizing your understanding of the candidate's core argument and approach.",
+  "feedback": {
+    "strengths": ["1-2 specific things the candidate explained well"],
+    "gaps": ["1-2 critical architectural, operational, or trade-off gaps in their answer"],
+    "rating": number (between 40 and 100 based on accuracy, depth, and clarity)
+  },
+  "modelAnswer": "A concise, master-level 2-4 sentence ideal answer to the question demonstrating high engineering standards.",
+  "nextQuestion": "A sharp, probing follow-up or next round question (1-2 sentences) tailored to their demonstrated knowledge."
+}`;
+
+  const prompt = `Evaluate candidate response for round: ${round}, question #${questionIdx + 1}.`;
+
+  try {
+    const raw = await groqChatCompletion(system, prompt, true);
+    const parsed = JSON.parse(raw);
+    if (parsed.understanding && parsed.feedback && parsed.modelAnswer && parsed.nextQuestion) {
+      return {
+        understanding: parsed.understanding,
+        feedback: {
+          strengths: Array.isArray(parsed.feedback.strengths) ? parsed.feedback.strengths : ["Clear technical communication."],
+          gaps: Array.isArray(parsed.feedback.gaps) ? parsed.feedback.gaps : ["Consider adding quantitative performance benchmarks."],
+          rating: typeof parsed.feedback.rating === 'number' ? parsed.feedback.rating : 75
+        },
+        modelAnswer: parsed.modelAnswer,
+        nextQuestion: parsed.nextQuestion
+      };
+    }
+    return evaluateCandidateTurnLocally(currentQuestion, candidateResponse, round, questionIdx);
+  } catch (err) {
+    console.warn("Groq structured interview evaluation failed, using local engine:", err);
+    return evaluateCandidateTurnLocally(currentQuestion, candidateResponse, round, questionIdx);
+  }
+};
+
+/**
+ * Interactive Mock Interview Response via Groq (Legacy & General Prompt support)
  */
 export const getInterviewResponseViaGroq = async (history: { role: string; content: string }[], userMessage: string, targetRole: string) => {
   const client = getGroqClient();
   if (!client) {
-    return `That is an insightful perspective on ${targetRole || 'software engineering'}. Could you elaborate on how you handled edge cases and measured the performance impact of that decision?`;
+    const roundList = ROUND_QUESTIONS.technical;
+    return roundList[0]?.question || `Can you walk me through the system architecture of your most recent engineering project?`;
   }
 
-  const system = `You are an elite Senior Technical Interviewer conducting a rigorous but supportive mock interview for a ${targetRole || 'Candidate'}. Ask probing follow-up questions, critique answers constructively, and keep questions concise (2-4 sentences).`;
+  const system = `You are an elite Senior Technical Interviewer conducting a rigorous mock interview for a ${targetRole || 'Candidate'}. Ask clear, challenging interview questions and provide constructive feedback. Keep questions concise (1-3 sentences).`;
   
   const messages: any[] = [
     { role: "system", content: system },
@@ -393,6 +456,6 @@ export const getInterviewResponseViaGroq = async (history: { role: string; conte
     }
   }
 
-  return "Could you please elaborate on your experience and key technical trade-offs?";
+  return ROUND_QUESTIONS.technical[0]?.question || "Could you please walk me through your engineering design principles?";
 };
 
