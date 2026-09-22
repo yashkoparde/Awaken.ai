@@ -32,15 +32,16 @@ const generateRandomSessionId = () => {
 
 interface VaultSimulatorProps {
   mode?: 'technical' | 'behavioral' | 'voice' | 'hr' | 'role-specific';
+  showEvaluationDirectly?: boolean;
 }
 
-export default function VaultSimulator({ mode: initialMode = 'technical' }: VaultSimulatorProps) {
+export default function VaultSimulator({ mode: initialMode = 'technical', showEvaluationDirectly = false }: VaultSimulatorProps) {
   const [selectedRound, setSelectedRound] = useState<'technical' | 'hr' | 'behavioral' | 'role-specific'>('technical');
   const [messages, setMessages] = useState<{ role: string, parts: { text: string }[] }[]>([]);
   const [userInput, setUserInput] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [sessionActive, setSessionActive] = useState(false);
+  const [sessionActive, setSessionActive] = useState(showEvaluationDirectly);
   const [questionCount, setQuestionCount] = useState(0);
   
   // Audio & Camera ref states
@@ -108,7 +109,36 @@ export default function VaultSimulator({ mode: initialMode = 'technical' }: Vaul
       gestures: number;
       facialExpression: number;
     }
-  } | null>(null);
+  } | null>(() => {
+    if (!showEvaluationDirectly) return null;
+    return {
+      overview: "Candidate demonstrated strong analytical reasoning and clear articulation of system architecture concepts. Answers showed deep familiarity with modern engineering standards. Key recommendations: provide more quantitative operational metrics during scenario discussions and maintain consistent vocal pacing.",
+      score: 87,
+      correctness: 89,
+      relevance: 91,
+      confidence: 84,
+      communication: 86,
+      technicalDepth: 88,
+      completeness: 85,
+      bodyLanguageScore: 87,
+      voiceMetrics: {
+        pronunciation: 88,
+        pace: 84,
+        clarity: 89,
+        content: 87,
+        tips: [
+          "Maintain consistent 135-150 words per minute cadence.",
+          "Elaborate on database isolation levels when discussing stateful systems."
+        ]
+      },
+      bodyMetrics: {
+        eyeContact: 88,
+        posture: 86,
+        gestures: 83,
+        facialExpression: 89
+      }
+    };
+  });
   const [sessionId, setSessionId] = useState<string | null>(null);
   
   const scrollRef = useRef<HTMLDivElement>(null);
