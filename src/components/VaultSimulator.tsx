@@ -604,7 +604,7 @@ export default function VaultSimulator({ mode: initialMode = 'technical', showEv
 
   return (
     <div className={`relative w-full mx-auto flex flex-col border border-white/5 bg-slate-900 shadow-2xl rounded-3xl overflow-hidden backdrop-blur-xl transition-all duration-500 ${
-      sessionActive && !evaluation ? 'max-w-6xl h-[700px]' : 'max-w-4xl h-[600px]'
+      sessionActive && !evaluation ? 'max-w-6xl h-[700px]' : 'max-w-5xl h-[620px]'
     }`}>
       {!sessionActive ? (
         <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-slate-950/90 backdrop-blur-lg px-10 text-center space-y-6">
@@ -620,8 +620,8 @@ export default function VaultSimulator({ mode: initialMode = 'technical', showEv
             </p>
           </div>
 
-          {/* Round Selector */}
-          <div className="flex flex-wrap justify-center gap-2 max-w-lg">
+          {/* Round Selector - 4 Rectangles Side by Side */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full max-w-4xl px-2">
             {[
               { id: 'technical', label: 'Technical Round', desc: 'Coding & Architecture' },
               { id: 'hr', label: 'HR Round', desc: 'Culture & Fit' },
@@ -631,22 +631,30 @@ export default function VaultSimulator({ mode: initialMode = 'technical', showEv
               <button
                 key={r.id}
                 onClick={() => setSelectedRound(r.id as any)}
-                className={`px-4 py-2.5 rounded-xl border text-left transition-all ${
+                className={`p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer relative overflow-hidden flex flex-col justify-between ${
                   selectedRound === r.id 
-                    ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-600/20' 
-                    : 'bg-slate-900 border-white/10 text-slate-400 hover:text-slate-200'
+                    ? 'bg-blue-600 border-blue-500 text-white shadow-xl shadow-blue-600/30 ring-2 ring-blue-400/40' 
+                    : 'bg-slate-900 border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20 hover:bg-slate-800/80'
                 }`}
               >
-                <p className="text-[11px] font-bold uppercase tracking-wider">{r.label}</p>
-                <p className="text-[9px] opacity-70">{r.desc}</p>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider">{r.label}</p>
+                  <p className="text-[10px] opacity-80 mt-1">{r.desc}</p>
+                </div>
+                {selectedRound === r.id && (
+                  <div className="mt-3 text-[9px] font-mono font-bold text-blue-100 uppercase flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    Selected
+                  </div>
+                )}
               </button>
             ))}
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 pt-2">
             <button
               onClick={startInitiation}
-              className="px-12 py-4 bg-blue-600 border border-blue-500 rounded-2xl font-black text-white uppercase text-xs tracking-widest hover:bg-blue-500 hover:shadow-blue-500/20 hover:shadow-lg transition-all cursor-pointer"
+              className="px-14 py-4 bg-blue-600 border border-blue-500 rounded-2xl font-black text-white uppercase text-xs tracking-widest hover:bg-blue-500 hover:shadow-blue-500/25 hover:shadow-lg transition-all cursor-pointer"
             >
               Start {selectedRound.toUpperCase()} Interview
             </button>
@@ -658,19 +666,25 @@ export default function VaultSimulator({ mode: initialMode = 'technical', showEv
           <div className="p-5 border-b border-white/5 flex items-center justify-between bg-slate-950/60 backdrop-blur-md">
             <div className="flex items-center gap-3">
               <Activity className="w-4 h-4 text-blue-400" />
-              <h4 className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Mock Assessment Trial</h4>
+              <h4 className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                {showEvaluationDirectly || evaluation 
+                  ? 'Module 7: AI Interview Evaluation & Performance Scorecard' 
+                  : 'Module 6: AI Interactive Interview Simulation'}
+              </h4>
             </div>
             
-            {/* Countdown Clock (use 5000 seconds of time) */}
+            {/* Header Telemetry / Countdown */}
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 px-4 py-1.5 rounded-full text-rose-400">
-                <Clock className="w-3.5 h-3.5 text-rose-400 animate-spin [animation-duration:12s]" />
-                <span className="text-xs font-black font-mono">{formatTimer(timerSeconds)}</span>
-              </div>
+              {(!showEvaluationDirectly && !evaluation) && (
+                <div className="flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 px-4 py-1.5 rounded-full text-rose-400">
+                  <Clock className="w-3.5 h-3.5 text-rose-400 animate-spin [animation-duration:12s]" />
+                  <span className="text-xs font-black font-mono">{formatTimer(timerSeconds)}</span>
+                </div>
+              )}
 
               <div className="flex items-center gap-1.5 bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full text-blue-400 text-[10px] font-bold uppercase tracking-wider">
                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                 <span>Telemetry Online</span>
+                 <span>{showEvaluationDirectly || evaluation ? 'Evaluation Synthesized' : 'Telemetry Online'}</span>
               </div>
             </div>
           </div>
@@ -685,10 +699,12 @@ export default function VaultSimulator({ mode: initialMode = 'technical', showEv
                        <div className="w-24 h-24 bg-blue-500/10 border border-blue-500/20 rounded-full flex items-center justify-center mx-auto text-3xl font-black text-blue-400 shadow-xl">
                          {evaluation.score}
                        </div>
-                       <div>
-                         <p className="text-[10px] uppercase text-slate-500 tracking-[0.4em] font-black">Combined Performance Index</p>
-                         <h3 className="text-xl font-bold text-white mt-1">Reviewing Trial Outcome</h3>
-                       </div>
+                        <div>
+                          <p className="text-[10px] uppercase text-slate-500 tracking-[0.4em] font-black">Combined Performance Index</p>
+                          <h3 className="text-xl font-bold text-white mt-1">
+                            {showEvaluationDirectly ? 'Comprehensive Interview Diagnostic & Scorecard' : 'Trial Outcome Synthesis'}
+                          </h3>
+                        </div>
                        
                        {/* Performance Stats Displays */}
                        <div className="space-y-6 max-w-2xl mx-auto px-4">
@@ -777,12 +793,29 @@ export default function VaultSimulator({ mode: initialMode = 'technical', showEv
                           {evaluation.overview}
                        </div>
                        
-                       <button 
-                         onClick={() => { setSessionActive(false); setEvaluation(null); setMessages([]); }}
-                         className="px-10 py-3.5 bg-blue-600 border border-blue-500 rounded-xl text-white font-bold uppercase text-xs tracking-widest hover:bg-blue-500 transition-colors cursor-pointer"
-                       >
-                         Start New Mock Trial
-                       </button>
+                        <div className="flex justify-center gap-3">
+                          {showEvaluationDirectly ? (
+                            <button 
+                              onClick={() => {
+                                // re-seed fresh evaluation or recalibrate
+                                setEvaluation({
+                                  ...evaluation,
+                                  score: Math.min(96, Math.max(82, Math.round(evaluation.score + (Math.random() - 0.5) * 6)))
+                                });
+                              }}
+                              className="px-8 py-3.5 bg-blue-600 border border-blue-500 rounded-xl text-white font-bold uppercase text-xs tracking-widest hover:bg-blue-500 transition-colors cursor-pointer"
+                            >
+                              Recalibrate Scorecard Analysis
+                            </button>
+                          ) : (
+                            <button 
+                              onClick={() => { setSessionActive(false); setEvaluation(null); setMessages([]); }}
+                              className="px-10 py-3.5 bg-blue-600 border border-blue-500 rounded-xl text-white font-bold uppercase text-xs tracking-widest hover:bg-blue-500 transition-colors cursor-pointer"
+                            >
+                              Start New Mock Trial
+                            </button>
+                          )}
+                        </div>
                     </motion.div>
                   ) : (
                     <>
