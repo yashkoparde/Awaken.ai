@@ -52,18 +52,20 @@ import AgentStatus from './AgentStatus';
 
 
 type ModuleId = 
-  | 'resume-analyzer'        // 1 | AI Resume Analyzer
-  | 'jd-analyzer'            // 2 | Job Description Analyzer
-  | 'job-match'               // 3 | Resume-Job Matching Engine
-  | 'skill-gap'              // 4 | Skill Gap Analysis
-  | 'prep-plan'              // 5 | Personalized Preparation Plan
-  | 'interview-sim'          // 6 | AI Interview Simulator
-  | 'interview-eval'         // 7 | AI Interview Evaluation
-  | 'coding-assessment'      // 8 | Coding & Technical Assessment
-  | 'aptitude-prep'          // 9 | Aptitude Preparation
-  | 'career-recommend'       // 10 | Career & Role Recommendation
-  | 'progress-dashboard'     // 11 | Progress Dashboard
-  | 'readiness-score';       // 12 | Placement Readiness Score
+  | 'profile-setup'          // 1 | Candidate Onboarding & Profile Setup
+  | 'voice-resume'           // 2 | Voice Resume Builder
+  | 'resume-analyzer'        // 3 | AI Resume Analyzer
+  | 'jd-analyzer'            // 4 | Job Description Analyzer
+  | 'job-match'               // 5 | Resume-Job Matching Engine
+  | 'skill-gap'              // 6 | Skill Gap Analysis
+  | 'prep-plan'              // 7 | Personalized Preparation Plan
+  | 'interview-sim'          // 8 | AI Interview Simulator
+  | 'interview-eval'         // 9 | AI Interview Evaluation
+  | 'coding-assessment'      // 10 | Coding & Technical Assessment
+  | 'aptitude-prep'          // 11 | Aptitude Preparation
+  | 'career-recommend'       // 12 | Career & Role Recommendation
+  | 'progress-dashboard'     // 13 | Progress Dashboard
+  | 'readiness-score';       // 14 | Placement Readiness Score
 
 interface UserProfile {
   photoURL?: string;
@@ -72,7 +74,14 @@ interface UserProfile {
 }
 
 export default function WarMap({ user }: { user: UserProfile }) {
-  const [activeModule, setActiveModule] = useState<ModuleId>('resume-analyzer');
+  const [activeModule, setActiveModule] = useState<ModuleId>(() => {
+    try {
+      const p = localStorage.getItem('awaken-onboarding-profile') || localStorage.getItem('yogyata-onboarding-profile');
+      return p ? 'profile-setup' : 'profile-setup';
+    } catch {
+      return 'profile-setup';
+    }
+  });
   const [showLogs, setShowLogs] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [performanceHistory, setPerformanceHistory] = useState<number[]>([45, 52, 48, 62, 58, 73, 67, 81, 76, 88]);
@@ -143,18 +152,20 @@ export default function WarMap({ user }: { user: UserProfile }) {
 
 
   const menuItems = [
-    { id: 'resume-analyzer', label: '1. AI Resume Analyzer', icon: FileSearch, desc: 'Upload PDF/DOCX & Audit' },
-    { id: 'jd-analyzer', label: '2. Job Description Analyzer', icon: FileText, desc: 'Skills & Responsibilities Extraction' },
-    { id: 'job-match', label: '3. Resume-Job Matching Engine', icon: GitCompare, desc: 'Candidate Fit & Experience Matrix' },
-    { id: 'skill-gap', label: '4. Skill Gap Analysis', icon: Layers, desc: '6-Domain Deficiencies Breakdown' },
-    { id: 'prep-plan', label: '5. Personalized Preparation Plan', icon: Milestone, desc: 'Day-Wise & Week-Wise Roadmap' },
-    { id: 'interview-sim', label: '6. AI Interview Simulator', icon: ShieldCheck, desc: 'Interactive Multi-Round Voice' },
-    { id: 'interview-eval', label: '7. AI Interview Evaluation', icon: Award, desc: '6-Dimension Scorecard & Presence' },
-    { id: 'coding-assessment', label: '8. Coding & Technical Assessment', icon: Code2, desc: 'Algorithms, SQL & Debugging' },
-    { id: 'aptitude-prep', label: '9. Aptitude Preparation', icon: Terminal, desc: 'Quant, Logical & Verbal Drills' },
-    { id: 'career-recommend', label: '10. Career & Role Recommendation', icon: TrendingUp, desc: 'Market Fit & Salary Insights' },
-    { id: 'progress-dashboard', label: '11. Progress Dashboard', icon: BarChart3, desc: 'Real-time Metrics & Trajectory' },
-    { id: 'readiness-score', label: '12. Placement Readiness Score', icon: Target, desc: 'Holistic Employability Index' },
+    { id: 'profile-setup', label: '1. Candidate Onboarding', icon: UserIcon, desc: 'Profile, Target Role & Social Links' },
+    { id: 'voice-resume', label: '2. Voice Resume Builder', icon: Mic, desc: 'Speech-to-ATS Resume Generation' },
+    { id: 'resume-analyzer', label: '3. AI Resume Analyzer', icon: FileSearch, desc: 'Upload PDF/DOCX & Audit' },
+    { id: 'jd-analyzer', label: '4. Job Description Analyzer', icon: FileText, desc: 'Skills & Responsibilities Extraction' },
+    { id: 'job-match', label: '5. Resume-Job Matching Engine', icon: GitCompare, desc: 'Candidate Fit & Experience Matrix' },
+    { id: 'skill-gap', label: '6. Skill Gap Analysis', icon: Layers, desc: '6-Domain Deficiencies Breakdown' },
+    { id: 'prep-plan', label: '7. Personalized Preparation Plan', icon: Milestone, desc: 'Day-Wise & Week-Wise Roadmap' },
+    { id: 'interview-sim', label: '8. AI Interview Simulator', icon: ShieldCheck, desc: 'Interactive Multi-Round Voice' },
+    { id: 'interview-eval', label: '9. AI Interview Evaluation', icon: Award, desc: '6-Dimension Scorecard & Presence' },
+    { id: 'coding-assessment', label: '10. Coding & Technical Assessment', icon: Code2, desc: 'Algorithms, SQL & Debugging' },
+    { id: 'aptitude-prep', label: '11. Aptitude Preparation', icon: Terminal, desc: 'Quant, Logical & Verbal Drills' },
+    { id: 'career-recommend', label: '12. Career & Role Recommendation', icon: TrendingUp, desc: 'Market Fit & Salary Insights' },
+    { id: 'progress-dashboard', label: '13. Progress Dashboard', icon: BarChart3, desc: 'Real-time Metrics & Trajectory' },
+    { id: 'readiness-score', label: '14. Placement Readiness Score', icon: Target, desc: 'Holistic Employability Index' },
   ];
 
   return (
@@ -327,6 +338,8 @@ export default function WarMap({ user }: { user: UserProfile }) {
                   transition={{ duration: 0.3 }}
                   className="h-full"
                 >
+                  {activeModule === 'profile-setup' && <ProfileSetup onComplete={() => setActiveModule('voice-resume')} />}
+                  {activeModule === 'voice-resume' && <VoiceResumeBuilder onGoToProfile={() => setActiveModule('profile-setup')} />}
                   {activeModule === 'resume-analyzer' && <ResumeBuilder focusMode="resume" />}
                   {activeModule === 'jd-analyzer' && <JDAnalyzer />}
                   {activeModule === 'job-match' && <ResumeMatchingEngine defaultTab="overview" />}
