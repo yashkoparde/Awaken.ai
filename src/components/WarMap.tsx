@@ -9,12 +9,14 @@ import VoiceResumeBuilder from './VoiceResumeBuilder';
 import WrittenTest from './WrittenTest';
 import ResourceFinder from './ResourceFinder';
 import CareerRoadmap from './CareerRoadmap';
+import ResumeMatchingEngine from './ResumeMatchingEngine';
+import CareerRecommendations from './CareerRecommendations';
 import { 
   Terminal, 
   Code2,
   Mic, 
   BarChart3, 
-  ChevronRight,
+  ChevronRight, 
   Activity,
   LogOut,
   User as UserIcon,
@@ -26,7 +28,17 @@ import {
   BrainCircuit,
   Clock,
   Compass,
-  Milestone
+  Milestone,
+  TrendingUp,
+  FileCheck2,
+  FileCode,
+  Sparkles,
+  Award,
+  Layers,
+  HelpCircle,
+  FileText,
+  GitCompare,
+  Target
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { api } from '../lib/api';
@@ -34,7 +46,19 @@ import { getAgentForModule, AGENTS } from '../lib/agents';
 import AgentStatus from './AgentStatus';
 
 
-type ModuleId = 'profile' | 'voice-resume' | 'ats-scan' | 'qa' | 'written' | 'interview' | 'resources' | 'roadmap' | 'analytics';
+type ModuleId = 
+  | 'resume-analyzer'        // 1 | AI Resume Analyzer
+  | 'jd-analyzer'            // 2 | Job Description Analyzer
+  | 'job-match'               // 3 | Resume-Job Matching Engine
+  | 'skill-gap'              // 4 | Skill Gap Analysis
+  | 'prep-plan'              // 5 | Personalized Preparation Plan
+  | 'interview-sim'          // 6 | AI Interview Simulator
+  | 'interview-eval'         // 7 | AI Interview Evaluation
+  | 'coding-assessment'      // 8 | Coding & Technical Assessment
+  | 'aptitude-prep'          // 9 | Aptitude Preparation
+  | 'career-recommend'       // 10 | Career & Role Recommendation
+  | 'progress-dashboard'     // 11 | Progress Dashboard
+  | 'readiness-score';       // 12 | Placement Readiness Score
 
 interface UserProfile {
   photoURL?: string;
@@ -43,7 +67,7 @@ interface UserProfile {
 }
 
 export default function WarMap({ user }: { user: UserProfile }) {
-  const [activeModule, setActiveModule] = useState<ModuleId>('profile');
+  const [activeModule, setActiveModule] = useState<ModuleId>('resume-analyzer');
   const [showLogs, setShowLogs] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [performanceHistory, setPerformanceHistory] = useState<number[]>([45, 52, 48, 62, 58, 73, 67, 81, 76, 88]);
@@ -97,15 +121,18 @@ export default function WarMap({ user }: { user: UserProfile }) {
 
 
   const menuItems = [
-    { id: 'profile', label: '1. Onboarding', icon: Settings, desc: 'Setup & Goals' },
-    { id: 'voice-resume', label: '2. Voice Resume', icon: Mic, desc: 'Oral Profile Builder' },
-    { id: 'ats-scan', label: '3. ATS Scan', icon: FileSearch, desc: 'ATS Scan & Audit' },
-    { id: 'qa', label: '4. Practice Q&A', icon: Terminal, desc: 'Interview Prep Questions' },
-    { id: 'written', label: '5. Written Test', icon: Code2, desc: 'Coding & Domain Quiz' },
-    { id: 'interview', label: '6. Mock Interview', icon: ShieldCheck, desc: 'Interactive Simulation' },
-    { id: 'resources', label: '7. Resource Hub', icon: Search, desc: 'Recommended Material' },
-    { id: 'roadmap', label: '8. Career Roadmap', icon: Milestone, desc: 'Custom Progression Path' },
-    { id: 'analytics', label: '9. Performance', icon: BarChart3, desc: 'Performance Metrics' },
+    { id: 'resume-analyzer', label: '1. AI Resume Analyzer', icon: FileSearch, desc: 'Upload PDF/DOCX & Audit' },
+    { id: 'jd-analyzer', label: '2. Job Description Analyzer', icon: FileText, desc: 'Skills & Responsibilities Extraction' },
+    { id: 'job-match', label: '3. Resume-Job Matching Engine', icon: GitCompare, desc: 'Candidate Fit & Experience Matrix' },
+    { id: 'skill-gap', label: '4. Skill Gap Analysis', icon: Layers, desc: '6-Domain Deficiencies Breakdown' },
+    { id: 'prep-plan', label: '5. Personalized Preparation Plan', icon: Milestone, desc: 'Day-Wise & Week-Wise Roadmap' },
+    { id: 'interview-sim', label: '6. AI Interview Simulator', icon: ShieldCheck, desc: 'Interactive Multi-Round Voice' },
+    { id: 'interview-eval', label: '7. AI Interview Evaluation', icon: Award, desc: '6-Dimension Scorecard & Presence' },
+    { id: 'coding-assessment', label: '8. Coding & Technical Assessment', icon: Code2, desc: 'Algorithms, SQL & Debugging' },
+    { id: 'aptitude-prep', label: '9. Aptitude Preparation', icon: Terminal, desc: 'Quant, Logical & Verbal Drills' },
+    { id: 'career-recommend', label: '10. Career & Role Recommendation', icon: TrendingUp, desc: 'Market Fit & Salary Insights' },
+    { id: 'progress-dashboard', label: '11. Progress Dashboard', icon: BarChart3, desc: 'Real-time Metrics & Trajectory' },
+    { id: 'readiness-score', label: '12. Placement Readiness Score', icon: Target, desc: 'Holistic Employability Index' },
   ];
 
   return (
@@ -238,15 +265,18 @@ export default function WarMap({ user }: { user: UserProfile }) {
                   transition={{ duration: 0.3 }}
                   className="h-full"
                 >
-                  {activeModule === 'profile' && <ProfileSetup onComplete={() => setActiveModule('voice-resume')} />}
-                  {activeModule === 'voice-resume' && <VoiceResumeBuilder onGoToProfile={() => setActiveModule('profile')} />}
-                  {activeModule === 'ats-scan' && <ResumeBuilder />}
-                  {activeModule === 'qa' && <QAGenerator />}
-                  {activeModule === 'written' && <WrittenTest />}
-                  {activeModule === 'interview' && <VaultSimulator mode="technical" />}
-                  {activeModule === 'resources' && <ResourceFinder />}
-                  {activeModule === 'roadmap' && <CareerRoadmap />}
-                  {activeModule === 'analytics' && <AnalyticsVault />}
+                  {activeModule === 'resume-analyzer' && <ResumeBuilder focusMode="resume" />}
+                  {activeModule === 'jd-analyzer' && <ResumeBuilder focusMode="job" />}
+                  {activeModule === 'job-match' && <ResumeMatchingEngine defaultTab="overview" />}
+                  {activeModule === 'skill-gap' && <ResumeMatchingEngine defaultTab="gaps" />}
+                  {activeModule === 'prep-plan' && <CareerRoadmap />}
+                  {activeModule === 'interview-sim' && <VaultSimulator mode="technical" />}
+                  {activeModule === 'interview-eval' && <VaultSimulator showEvaluationDirectly={true} />}
+                  {activeModule === 'coding-assessment' && <WrittenTest defaultCategory="coding" />}
+                  {activeModule === 'aptitude-prep' && <WrittenTest defaultCategory="quant" />}
+                  {activeModule === 'career-recommend' && <CareerRecommendations />}
+                  {activeModule === 'progress-dashboard' && <AnalyticsVault viewMode="dashboard" />}
+                  {activeModule === 'readiness-score' && <AnalyticsVault viewMode="readiness" />}
                 </motion.div>
               </AnimatePresence>
             </div>
