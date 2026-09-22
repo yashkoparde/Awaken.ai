@@ -4,7 +4,7 @@ import { api } from '../lib/api';
 import { Briefcase, GraduationCap, Globe, User, Phone, Mail, Github, Code, Linkedin, Link } from 'lucide-react';
 
 
-export default function ProfileSetup({ onComplete }: { onComplete: () => void }) {
+export default function ProfileSetup({ onComplete }: { onComplete?: () => void } = {}) {
   const currentUid = api.currentUser?.id || api.currentUser?.uid || auth.currentUser?.uid || 'guest';
   const profileStorageKey = `awaken-profile-${currentUid}`;
 
@@ -93,10 +93,10 @@ export default function ProfileSetup({ onComplete }: { onComplete: () => void })
           console.warn("Supabase profiles update skipped (expected if tables are not yet created):", error);
         }
       }
-      onComplete();
+      if (onComplete) onComplete();
     } catch (err) {
       console.error(err);
-      onComplete();
+      if (onComplete) onComplete();
     } finally {
       setIsSaving(false);
     }
