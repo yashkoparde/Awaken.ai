@@ -78,14 +78,18 @@ export const AGENTS: Record<string, Agent> = {
 
 export const getAgentForModule = (moduleId: string): Agent => {
   switch (moduleId) {
-    case 'profile': return AGENTS.orchestrator;
-    case 'voice-resume': return AGENTS.resume_architect;
-    case 'ats-scan': return AGENTS.forensic_auditor;
-    case 'qa': return AGENTS.curriculum_designer;
-    case 'written': return AGENTS.curriculum_designer;
-    case 'interview': return AGENTS.vault_adversary;
-    case 'resources': return AGENTS.curriculum_designer;
-    case 'analytics': return AGENTS.forensic_auditor;
+    case 'resume-analyzer': return AGENTS.forensic_auditor;
+    case 'jd-analyzer': return AGENTS.forensic_auditor;
+    case 'job-match': return AGENTS.forensic_auditor;
+    case 'skill-gap': return AGENTS.forensic_auditor;
+    case 'prep-plan': return AGENTS.curriculum_designer;
+    case 'interview-sim': return AGENTS.vault_adversary;
+    case 'interview-eval': return AGENTS.vault_adversary;
+    case 'coding-assessment': return AGENTS.curriculum_designer;
+    case 'aptitude-prep': return AGENTS.curriculum_designer;
+    case 'career-recommend': return AGENTS.curriculum_designer;
+    case 'progress-dashboard': return AGENTS.orchestrator;
+    case 'readiness-score': return AGENTS.orchestrator;
     default: return AGENTS.orchestrator;
   }
 };
