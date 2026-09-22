@@ -6,9 +6,9 @@ import { api } from '../lib/api';
 import { generateWrittenTestViaGroq } from '../lib/groq';
 
 
-export default function WrittenTest() {
+export default function WrittenTest({ defaultCategory = 'mcq' }: { defaultCategory?: 'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal' }) {
   const [topic, setTopic] = useState('');
-  const [category, setCategory] = useState<'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal'>('mcq');
+  const [category, setCategory] = useState<'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal'>(defaultCategory);
   const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
   const [isGenerating, setIsGenerating] = useState(false);
   const [questions, setQuestions] = useState<any[]>([]);
@@ -64,9 +64,19 @@ export default function WrittenTest() {
     <div className="w-full max-w-4xl mx-auto space-y-8 pb-20 font-sans">
       <div className="space-y-4">
         <div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-white">Coding, Technical & Aptitude Assessment</h2>
+          <div className="flex items-center gap-2 text-blue-400 mb-1">
+            <Terminal className="w-3.5 h-3.5" />
+            <span className="text-[10px] uppercase font-mono font-bold tracking-widest">
+              {['quant', 'logical', 'verbal'].includes(category) ? 'Module 9: Aptitude Preparation' : 'Module 8: Coding & Technical Assessment'}
+            </span>
+          </div>
+          <h2 className="text-3xl font-extrabold tracking-tight text-white">
+            {['quant', 'logical', 'verbal'].includes(category) ? 'Aptitude Preparation & Diagnostic Engine' : 'Coding & Technical Assessment'}
+          </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Generate role-specific coding questions, SQL problems, debugging tasks, and aptitude tests (Quantitative, Logical, Verbal).
+            {['quant', 'logical', 'verbal'].includes(category) 
+              ? 'Generate quantitative aptitude, logical reasoning, and verbal ability questions with difficulty levels and performance tracking.'
+              : 'Generate role-specific coding questions, algorithmic problems, SQL challenges, and debugging tasks.'}
           </p>
         </div>
 
