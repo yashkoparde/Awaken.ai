@@ -78,6 +78,8 @@ export const AGENTS: Record<string, Agent> = {
 
 export const getAgentForModule = (moduleId: string): Agent => {
   switch (moduleId) {
+    case 'profile-setup': return AGENTS.orchestrator;
+    case 'voice-resume': return AGENTS.resume_architect;
     case 'resume-analyzer': return AGENTS.forensic_auditor;
     case 'jd-analyzer': return AGENTS.forensic_auditor;
     case 'job-match': return AGENTS.forensic_auditor;
