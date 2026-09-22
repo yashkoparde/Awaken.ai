@@ -51,9 +51,9 @@ body {
   100% { background-position: 200% 0; }
 }
 
-/* Warm Orange/Amber Tinge Colour Grade Tile Filter */
+/* Warm Orange/Amber Tinge Colour Grade Tile Filter - Subtle & Elegant (No Flaring) */
 .leaflet-orange-tinge .leaflet-tile {
-  filter: brightness(0.88) contrast(1.18) sepia(0.55) hue-rotate(-22deg) saturate(1.75);
+  filter: brightness(0.82) contrast(1.05) sepia(0.25) hue-rotate(-15deg) saturate(1.15);
 }
 
 .leaflet-container {

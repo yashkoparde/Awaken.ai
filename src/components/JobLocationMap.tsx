@@ -61,10 +61,10 @@ export default function JobLocationMap({
 
     // Custom Amber / Warm Orange Marker Icon Generator
     const createMarkerIcon = (isSelected: boolean) => {
-      const bg = isSelected ? '#f97316' : '#ea580c';
-      const shadow = isSelected ? 'rgba(249,115,22,0.85)' : 'rgba(234,88,12,0.6)';
-      const size = isSelected ? 34 : 28;
-      const border = isSelected ? '3px solid #ffffff' : '2px solid #ffedd5';
+      const bg = isSelected ? '#ea580c' : '#c2410c';
+      const shadow = isSelected ? 'rgba(234,88,12,0.45)' : 'rgba(194,65,12,0.3)';
+      const size = isSelected ? 32 : 26;
+      const border = isSelected ? '2px solid #ffffff' : '1.5px solid #fed7aa';
 
       return L.divIcon({
         className: 'custom-orange-leaflet-marker',
@@ -79,7 +79,7 @@ export default function JobLocationMap({
             align-items: center;
             justify-content: center;
             color: #ffffff;
-            box-shadow: 0 0 16px ${shadow}, 0 2px 6px rgba(0,0,0,0.6);
+            box-shadow: 0 2px 8px ${shadow}, 0 1px 3px rgba(0,0,0,0.5);
             cursor: pointer;
             transition: transform 0.2s ease;
           ">
@@ -164,22 +164,22 @@ export default function JobLocationMap({
   }, [selectedJobId]);
 
   return (
-    <div className="relative w-full h-full min-h-[340px] md:min-h-[460px] rounded-2xl overflow-hidden border border-orange-500/20 shadow-2xl bg-slate-950">
-      {/* Leaflet Map Canvas with Orange Tinge filter */}
+    <div className="relative w-full h-full min-h-[340px] md:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-slate-950">
+      {/* Leaflet Map Canvas with Soft Orange Tinge filter */}
       <div 
         ref={mapContainerRef} 
         className="w-full h-full min-h-[340px] md:min-h-[460px] leaflet-orange-tinge z-0" 
       />
 
       {/* Floating Status Badge */}
-      <div className="absolute top-3 right-3 z-[400] flex items-center gap-2 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-orange-500/30 shadow-lg text-[10px] text-orange-400 font-mono font-bold">
-        <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
+      <div className="absolute top-3 right-3 z-[400] flex items-center gap-2 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 shadow-lg text-[10px] text-slate-300 font-mono font-medium">
+        <span className="w-2 h-2 rounded-full bg-emerald-500" />
         <span>India Live Radar: {city}</span>
       </div>
 
       {/* Bottom Metadata Info */}
-      <div className="absolute bottom-3 left-3 z-[400] bg-slate-950/85 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10 text-[9px] text-slate-400 font-mono flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+      <div className="absolute bottom-3 left-3 z-[400] bg-slate-950/90 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10 text-[9px] text-slate-400 font-mono flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
         <span>OpenStreetMap Leaflet GIS (No API Key Required)</span>
       </div>
     </div>

@@ -302,25 +302,25 @@ ${skillsInput}`;
         </div>
       </div>
 
-      {/* TOP SECTION: REAL LEAFLET RADAR (ORANGE TINGE COLOUR GRADE) ALONGSIDE JOB NODES ON LEFT */}
-      <div className="p-6 md:p-8 bg-slate-900 border border-orange-500/20 rounded-[2.5rem] shadow-2xl space-y-6">
+      {/* TOP SECTION: REAL LEAFLET RADAR ALONGSIDE JOB NODES ON LEFT */}
+      <div className="p-6 md:p-8 bg-slate-900 border border-white/10 rounded-[2.5rem] shadow-2xl space-y-6">
         {/* Top Radar Bar: Location Selector & District Search */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-white/5 pb-5">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400">
+            <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-orange-400">
               <MapPin className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-black text-white uppercase tracking-wider">
+                <h3 className="text-base font-bold text-white uppercase tracking-wider">
                   Live Opportunity Radar & Geocoded Map
                 </h3>
-                <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">
+                <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-300 border border-white/10">
                   India First
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                Leaflet GIS radar with warm orange tinge filter, localized markers & no API key requirement
+                Leaflet GIS radar with subtle ambient cartography, localized markers and no API key requirement
               </p>
             </div>
           </div>
@@ -334,12 +334,12 @@ ${skillsInput}`;
                 value={customSearchQuery}
                 onChange={(e) => setCustomSearchQuery(e.target.value)}
                 placeholder="Search Bidar, Kalaburagi, Delhi..."
-                className="w-full bg-slate-950/80 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-600 focus:border-orange-500 outline-none transition-all font-medium"
+                className="w-full bg-slate-950/80 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-600 focus:border-orange-500/60 outline-none transition-all font-medium"
               />
             </div>
             <button
               type="submit"
-              className="px-4 py-2 bg-orange-600 hover:bg-orange-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-orange-600/20 cursor-pointer shrink-0"
+              className="px-4 py-2 bg-orange-600/80 hover:bg-orange-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer shrink-0"
             >
               Locate
             </button>
@@ -360,8 +360,8 @@ ${skillsInput}`;
               }}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                 selectedCity === key
-                  ? 'bg-orange-600 border-orange-500 text-white shadow-lg shadow-orange-600/25'
-                  : 'bg-slate-950/60 border-white/10 text-slate-400 hover:border-orange-500/40 hover:text-orange-300'
+                  ? 'bg-slate-800 border-orange-500/60 text-white shadow-md'
+                  : 'bg-slate-950/60 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200'
               }`}
             >
               {key === 'Bidar' ? 'Bidar District' : data.label}
