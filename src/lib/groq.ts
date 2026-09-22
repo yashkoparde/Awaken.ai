@@ -314,35 +314,13 @@ export const generateQuestionsViaGroq = async (role: string, experience: string,
   return JSON.parse(raw);
 };
 
+import { getFallbackQuestions } from "./assessmentBank";
+
 export const generateWrittenTestViaGroq = async (
   topic: string, 
   category: 'coding' | 'mcq' | 'sql' | 'debugging' | 'quant' | 'logical' | 'verbal' = 'mcq',
   difficulty: 'easy' | 'medium' | 'hard' = 'medium'
 ) => {
-  const client = getGroqClient();
-  if (!client) {
-    return [
-      {
-        question: `In ${topic || 'Technical Assessment'} (${difficulty.toUpperCase()} difficulty): Which approach guarantees optimal time efficiency?`,
-        options: ["Hash Table Lookup", "Binary Search Tree traversal", "Linear Scan", "Nested Iteration"],
-        correctAnswer: "Hash Table Lookup",
-        explanation: "Hash tables provide average O(1) lookup performance."
-      },
-      {
-        question: `What is the output or behavior of this ${category.toUpperCase()} problem?`,
-        options: ["O(N log N) scalability", "Memory allocation error", "Deadlock condition", "Idempotent execution"],
-        correctAnswer: "O(N log N) scalability",
-        explanation: "Divide-and-conquer methodologies achieve logarithmic depth."
-      },
-      {
-        question: "Which invariant must hold true across transactional updates?",
-        options: ["ACID Compliance", "Stateless execution", "Eventual consistency only", "Unchecked mutation"],
-        correctAnswer: "ACID Compliance",
-        explanation: "Atomicity, Consistency, Isolation, and Durability ensure data integrity."
-      }
-    ];
-  }
-
   const categoryPrompts: Record<string, string> = {
     coding: "coding algorithms, data structures, and implementation questions",
     mcq: "core domain multiple choice questions",
@@ -355,18 +333,33 @@ export const generateWrittenTestViaGroq = async (
 
   const domainDesc = categoryPrompts[category] || "technical assessment questions";
 
-  const system = `You are an elite Technical Examiner and Placement Assessment Designer. 
+  const client = getGroqClient();
+  if (!client) {
+    return getFallbackQuestions(category, topic);
+  }
+
+  try {
+    const system = `You are an elite Technical Examiner and Placement Assessment Designer. 
 Generate 5 high-yield multiple choice questions specifically evaluating: ${domainDesc}.
 Difficulty Level: ${difficulty.toUpperCase()}.
-Return ONLY a valid JSON array of objects with keys:
+Return ONLY a valid JSON object with a single key "questions" containing an array of 5 question objects with keys:
 - question: string (can include code snippets or mathematical expressions)
 - options: array of 4 distinct string choices
 - correctAnswer: exact string matching one of the options
 - explanation: concise technical breakdown of why this choice is correct`;
 
-  const prompt = `Topic / Context: ${topic || 'General Aptitude and Engineering'}, Category: ${category}, Difficulty: ${difficulty}`;
-  const raw = await groqChatCompletion(system, prompt, true);
-  return JSON.parse(raw);
+    const prompt = `Topic / Context: ${topic || 'General Aptitude and Engineering'}, Category: ${category}, Difficulty: ${difficulty}`;
+    const raw = await groqChatCompletion(system, prompt, true);
+    const parsed = JSON.parse(raw);
+    const list = Array.isArray(parsed) ? parsed : (parsed.questions || parsed.data || parsed.items || []);
+    if (Array.isArray(list) && list.length > 0) {
+      return list;
+    }
+    return getFallbackQuestions(category, topic);
+  } catch (err) {
+    console.warn("Groq written test generation error, utilizing verified assessment bank:", err);
+    return getFallbackQuestions(category, topic);
+  }
 };
 
 /**

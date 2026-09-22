@@ -4,6 +4,7 @@ import { Terminal, ShieldQuestion, CheckCircle2, XCircle, Clock, Zap } from 'luc
 import { supabase, auth } from '../lib/supabase';
 import { api } from '../lib/api';
 import { generateWrittenTestViaGroq } from '../lib/groq';
+import { getFallbackQuestions } from '../lib/assessmentBank';
 
 
 interface WrittenTestProps {
@@ -56,9 +57,14 @@ export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTest
     setShowResults(false);
     try {
       const data = await generateWrittenTestViaGroq(activeTopic, activeCat, difficulty);
-      setQuestions(data);
+      if (Array.isArray(data) && data.length > 0) {
+        setQuestions(data);
+      } else {
+        setQuestions(getFallbackQuestions(activeCat, activeTopic));
+      }
     } catch (err) {
-      console.error(err);
+      console.warn("Falling back to local question bank:", err);
+      setQuestions(getFallbackQuestions(activeCat, activeTopic));
     } finally {
       setIsGenerating(false);
     }
@@ -131,7 +137,7 @@ export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTest
           <div className="flex items-center gap-2 text-blue-400 mb-1">
             <Terminal className="w-3.5 h-3.5" />
             <span className="text-[10px] uppercase font-mono font-bold tracking-widest">
-              {effectiveMode === 'aptitude' ? 'Module 9: Aptitude Preparation & Diagnostic Engine' : 'Module 8: Coding & Technical Assessment'}
+              {effectiveMode === 'aptitude' ? 'Module 11: Aptitude Preparation & Diagnostic Engine' : 'Module 10: Coding & Technical Assessment'}
             </span>
           </div>
           <h2 className="text-3xl font-extrabold tracking-tight text-white">
@@ -257,10 +263,12 @@ export default function WrittenTest({ defaultCategory, moduleMode }: WrittenTest
             {!showResults ? (
               <button 
                 onClick={submitTest}
-                disabled={Object.keys(answers).length < 5}
-                className="w-full py-5 bg-blue-600 rounded-2xl text-white font-black uppercase text-xs tracking-widest hover:bg-blue-500 transition-all shadow-xl disabled:opacity-20"
+                disabled={questions.length === 0 || Object.keys(answers).length < questions.length}
+                className="w-full py-5 bg-blue-600 rounded-2xl text-white font-black uppercase text-xs tracking-widest hover:bg-blue-500 transition-all shadow-xl disabled:opacity-20 cursor-pointer disabled:cursor-not-allowed"
               >
-                Complete Submission
+                {Object.keys(answers).length < questions.length 
+                  ? `Answer All Questions (${Object.keys(answers).length}/${questions.length}) to Submit` 
+                  : 'Complete Submission'}
               </button>
             ) : (
               <div className="p-10 bg-slate-900 border border-white/5 rounded-[2rem] text-center space-y-4">
