@@ -43,7 +43,8 @@ import {
   Target,
   Bell,
   CheckCircle2,
-  X
+  X,
+  BookOpen
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { api } from '../lib/api';
@@ -65,7 +66,8 @@ type ModuleId =
   | 'aptitude-prep'          // 11 | Aptitude Preparation
   | 'career-recommend'       // 12 | Career & Role Recommendation
   | 'progress-dashboard'     // 13 | Progress Dashboard
-  | 'readiness-score';       // 14 | Placement Readiness Score
+  | 'readiness-score'        // 14 | Placement Readiness Score
+  | 'resource-hub';          // 15 | AI Resource Hub
 
 interface UserProfile {
   photoURL?: string;
@@ -166,6 +168,7 @@ export default function WarMap({ user }: { user: UserProfile }) {
     { id: 'career-recommend', label: '12. Career & Role Recommendation', icon: TrendingUp, desc: 'Market Fit & Salary Insights' },
     { id: 'progress-dashboard', label: '13. Progress Dashboard', icon: BarChart3, desc: 'Real-time Metrics & Trajectory' },
     { id: 'readiness-score', label: '14. Placement Readiness Score', icon: Target, desc: 'Holistic Employability Index' },
+    { id: 'resource-hub', label: '15. AI Resource Hub', icon: BookOpen, desc: 'Curated Roadmaps, Documentation & Repositories' },
   ];
 
   return (
@@ -352,6 +355,7 @@ export default function WarMap({ user }: { user: UserProfile }) {
                   {activeModule === 'career-recommend' && <CareerRecommendations />}
                   {activeModule === 'progress-dashboard' && <AnalyticsVault viewMode="dashboard" />}
                   {activeModule === 'readiness-score' && <PlacementReadinessScore />}
+                  {activeModule === 'resource-hub' && <ResourceFinder />}
                 </motion.div>
               </AnimatePresence>
             </div>

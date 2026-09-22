@@ -92,6 +92,7 @@ export const getAgentForModule = (moduleId: string): Agent => {
     case 'career-recommend': return AGENTS.curriculum_designer;
     case 'progress-dashboard': return AGENTS.orchestrator;
     case 'readiness-score': return AGENTS.orchestrator;
+    case 'resource-hub': return AGENTS.curriculum_designer;
     default: return AGENTS.orchestrator;
   }
 };
